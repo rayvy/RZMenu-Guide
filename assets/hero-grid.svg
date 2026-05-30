@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-label="Абстрактная сетка интерфейса моддинга">
+  <rect width="1600" height="1000" fill="#17191f"/>
+  <g fill="none" stroke="#303641" stroke-width="1">
+    <path d="M0 120h1600M0 240h1600M0 360h1600M0 480h1600M0 600h1600M0 720h1600M0 840h1600"/>
+    <path d="M160 0v1000M320 0v1000M480 0v1000M640 0v1000M800 0v1000M960 0v1000M1120 0v1000M1280 0v1000M1440 0v1000"/>
+  </g>
+  <g opacity="0.9">
+    <rect x="955" y="150" width="390" height="250" rx="8" fill="#20242c" stroke="#3a414d"/>
+    <rect x="996" y="196" width="220" height="18" rx="4" fill="#e0473f"/>
+    <rect x="996" y="238" width="300" height="12" rx="4" fill="#747b88"/>
+    <rect x="996" y="270" width="260" height="12" rx="4" fill="#747b88"/>
+    <rect x="996" y="320" width="110" height="32" rx="6" fill="#f0b34c"/>
+  </g>
+  <g opacity="0.82">
+    <rect x="1080" y="485" width="270" height="170" rx="8" fill="#20242c" stroke="#3a414d"/>
+    <path d="M1130 600l70-70 45 45 38-38" fill="none" stroke="#54b68b" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g opacity="0.72" fill="#e0473f">
+    <circle cx="1410" cy="226" r="7"/>
+    <circle cx="1410" cy="256" r="7"/>
+    <circle cx="1410" cy="286" r="7"/>
+  </g>
+</svg>
