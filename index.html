@@ -1,42 +1,55 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RZMenu Guide</title>
-    <meta name="description" content="Markdown-based bilingual guide site for RZMenu modding.">
+    <meta name="description" content="Bilingual RZMenu modding guide, examples, asset dump, and support page.">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header class="topbar">
-      <a class="brand" href="#/ru/home" aria-label="RZMenu Guide">
-        <span class="brand-mark">RZ</span>
-        <span>RZMenu Guide</span>
+      <a class="brand" href="#/en/get-started" aria-label="RZMenu Guide home">
+        <img class="brand-avatar" src="assets/ray_avatar.png" alt="">
+        <span>
+          <strong>RZMenu Guide</strong>
+          <small id="brand-subtitle">Friendly pain manual</small>
+        </span>
       </a>
 
+      <nav id="section-tabs" class="section-tabs" aria-label="Site sections"></nav>
+
       <div class="top-actions">
-        <nav class="lang-switch" aria-label="Language">
-          <a data-lang="ru" href="#/ru/home">RU</a>
-          <a data-lang="en" href="#/en/home">EN</a>
+        <nav class="lang-switch" aria-label="Language switch">
+          <a data-lang="en" href="#/en/get-started">ENG</a>
+          <a data-lang="ru" href="#/ru/get-started">RU</a>
         </nav>
         <a class="repo-link" href="https://github.com/rayvy/RZMenu-Guide">GitHub</a>
       </div>
     </header>
 
-    <main class="app-shell">
-      <aside class="sidebar">
-        <div class="sidebar-heading">
-          <span id="sidebar-kicker">Guides</span>
-          <strong id="sidebar-title">RZMenu</strong>
+    <main class="layout">
+      <aside class="side-panel">
+        <div class="mascot-card">
+          <img id="mascot-image" src="assets/ray_chan_pointing_ai_slop.png" alt="">
+          <div>
+            <span id="side-kicker">Manual mode</span>
+            <strong id="side-title">Pick a page</strong>
+          </div>
         </div>
-        <nav id="guide-nav" class="guide-nav" aria-label="Guides"></nav>
+        <nav id="page-nav" class="page-nav" aria-label="Pages"></nav>
       </aside>
 
-      <article class="content">
-        <div id="loading" class="loading">Loading guide...</div>
+      <article class="content-panel">
+        <div id="loading" class="loading">Loading...</div>
         <div id="guide-content" class="markdown" hidden></div>
       </article>
     </main>
+
+    <footer class="footer">
+      <span>Made by <strong>Rayvich</strong></span>
+      <a href="https://github.com/rayvy">github.com/rayvy</a>
+    </footer>
 
     <script src="script.js"></script>
   </body>

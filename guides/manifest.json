@@ -1,50 +1,152 @@
 {
-  "title": {
-    "ru": "RZMenu",
-    "en": "RZMenu"
-  },
   "languages": {
-    "ru": {
-      "guides": [
+    "en": {
+      "subtitle": "Friendly pain manual",
+      "kicker": "Manual mode",
+      "sections": [
         {
-          "slug": "home",
-          "title": "Главная",
-          "description": "Как устроен сайт и где писать гайды",
-          "file": "guides/ru/home.md"
+          "slug": "get-started",
+          "title": "Get Started",
+          "kicker": "Start here",
+          "mascot": "assets/ray_chan_pointing_ai_slop.png",
+          "pages": [
+            {
+              "slug": "overview",
+              "title": "Overview",
+              "description": "What this site is and how to use it",
+              "file": "guides/en/get-started/overview.md"
+            },
+            {
+              "slug": "install",
+              "title": "Installation",
+              "description": "Blender and RZMenu setup",
+              "file": "guides/en/get-started/install.md"
+            }
+          ]
         },
         {
-          "slug": "install",
-          "title": "Установка",
-          "description": "Базовая установка Blender и RZMenu",
-          "file": "guides/ru/install.md"
+          "slug": "code-examples",
+          "title": "Code Examples",
+          "kicker": "Copy, paste, suffer less",
+          "mascot": "assets/ray_chan_freaky_ai_slop.png",
+          "pages": [
+            {
+              "slug": "snippets",
+              "title": "Snippets",
+              "description": "Small examples and patterns",
+              "file": "guides/en/code-examples/snippets.md"
+            }
+          ]
         },
         {
-          "slug": "media",
-          "title": "Картинки и видео",
-          "description": "Как вставлять скриншоты, гифки и mp4",
-          "file": "guides/ru/media.md"
+          "slug": "assets",
+          "title": "Assets",
+          "kicker": "Useful file dump",
+          "mascot": "assets/ray_chan_pointing_ai_slop.png",
+          "pages": [
+            {
+              "slug": "library",
+              "title": "Library",
+              "description": "Themes, samples, .rmzct and .rzm files",
+              "file": "guides/en/assets/library.md",
+              "type": "assets"
+            },
+            {
+              "slug": "submit",
+              "title": "Submit Asset",
+              "description": "How to add files to the dump",
+              "file": "guides/en/assets/submit.md"
+            }
+          ]
+        },
+        {
+          "slug": "support-me",
+          "title": "Support Me",
+          "kicker": "Keep the tool alive",
+          "mascot": "assets/ray_chan_freaky_ai_slop.png",
+          "pages": [
+            {
+              "slug": "support",
+              "title": "Support",
+              "description": "Rayvich links and notes",
+              "file": "guides/en/support-me/support.md"
+            }
+          ]
         }
       ]
     },
-    "en": {
-      "guides": [
+    "ru": {
+      "subtitle": "Боль, но с инструкцией",
+      "kicker": "Режим выживания",
+      "sections": [
         {
-          "slug": "home",
-          "title": "Home",
-          "description": "How this site works",
-          "file": "guides/en/home.md"
+          "slug": "get-started",
+          "title": "ДАВАЙ ЛАБАЙ ДАНЯ",
+          "kicker": "Начинай отсюда",
+          "mascot": "assets/ray_chan_pointing_ai_slop.png",
+          "pages": [
+            {
+              "slug": "overview",
+              "title": "Обзор",
+              "description": "Что это за сайт и куда ты попал",
+              "file": "guides/ru/get-started/overview.md"
+            },
+            {
+              "slug": "install",
+              "title": "Установка",
+              "description": "Blender и RZMenu без шаманства",
+              "file": "guides/ru/get-started/install.md"
+            }
+          ]
         },
         {
-          "slug": "install",
-          "title": "Installation",
-          "description": "Basic Blender and RZMenu setup",
-          "file": "guides/en/install.md"
+          "slug": "code-examples",
+          "title": "Код-Залупы",
+          "kicker": "Скопировал, помолился",
+          "mascot": "assets/ray_chan_freaky_ai_slop.png",
+          "pages": [
+            {
+              "slug": "snippets",
+              "title": "Сниппеты",
+              "description": "Маленькие куски кода и примеры",
+              "file": "guides/ru/code-examples/snippets.md"
+            }
+          ]
         },
         {
-          "slug": "media",
-          "title": "Images and video",
-          "description": "Screenshots, gifs, and mp4 embeds",
-          "file": "guides/en/media.md"
+          "slug": "assets",
+          "title": "Файлопомойка",
+          "kicker": "Полезные штуки",
+          "mascot": "assets/ray_chan_pointing_ai_slop.png",
+          "pages": [
+            {
+              "slug": "library",
+              "title": "Склад",
+              "description": "Темы, примеры, .rmzct и .rzm файлы",
+              "file": "guides/ru/assets/library.md",
+              "type": "assets"
+            },
+            {
+              "slug": "submit",
+              "title": "Как залить",
+              "description": "Правила добавления файлов",
+              "file": "guides/ru/assets/submit.md"
+            }
+          ]
+        },
+        {
+          "slug": "support-me",
+          "title": "ЕслиНеЖалко",
+          "kicker": "Поддержка автора",
+          "mascot": "assets/ray_chan_freaky_ai_slop.png",
+          "pages": [
+            {
+              "slug": "support",
+              "title": "Поддержать",
+              "description": "Rayvich, GitHub и прочее",
+              "file": "guides/ru/support-me/support.md"
+            }
+          ]
         }
       ]
     }

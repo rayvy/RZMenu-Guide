@@ -1,24 +1,21 @@
 # RZMenu Guide
 
-Static bilingual guide site for RZMenu modding.
+Static bilingual guide site for RZMenu.
 
-## Writing guides
+## Main folders
 
-Guides are plain Markdown files:
-
-- Russian: `guides/ru/*.md`
-- English: `guides/en/*.md`
-
-The sidebar menu is controlled by `guides/manifest.json`.
-
-Put screenshots, gifs, and videos in `media/`, then reference them from Markdown:
-
-```md
-![Screenshot](media/screenshot.png)
-
-<video controls src="media/demo.mp4"></video>
-```
+- `guides/en/`: English Markdown pages.
+- `guides/ru/`: Russian Markdown pages.
+- `guide-media/`: tutorial screenshots, gifs, and videos.
+- `assets/`: site visuals, background, avatar, mascot.
+- `asset-dump/`: downloadable user-facing assets and catalog.
 
 ## Publishing
 
 Push to `main`. GitHub Actions deploys the site to GitHub Pages automatically.
+
+Local non-technical instructions are in:
+
+```text
+заметка_для_дауна.txt
+```

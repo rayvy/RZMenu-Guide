@@ -1,0 +1,183 @@
+RZMenu-Guide: как обновлять сайт без знания git
+=============================================
+
+Где лежит проект:
+C:\Users\Rayvy\Documents\GitHub\RZMenu-Guide
+
+Ссылка на сайт:
+https://rayvy.github.io/RZMenu-Guide/
+
+Ссылка на репозиторий:
+https://github.com/rayvy/RZMenu-Guide
+
+
+1. Как писать гайды
+-------------------
+
+Открывай папку:
+C:\Users\Rayvy\Documents\GitHub\RZMenu-Guide\guides
+
+Английский сайт:
+guides\en\
+
+Русский сайт:
+guides\ru\
+
+Обычный гайд пишется в .md файле. Это Markdown.
+Пример:
+
+# Заголовок
+
+Обычный текст.
+
+## Раздел
+
+- пункт
+- пункт
+
+![Картинка](guide-media/my-screenshot.png)
+
+<video controls src="guide-media/my-video.mp4"></video>
+
+
+2. Куда класть картинки, видео и гифки для гайдов
+-------------------------------------------------
+
+Только обучающие материалы клади сюда:
+guide-media\
+
+Примеры:
+guide-media\install-01.png
+guide-media\export-demo.gif
+guide-media\quick-test.mp4
+
+В .md файле ссылка будет такая:
+![Описание](guide-media/install-01.png)
+
+Видео:
+<video controls src="guide-media/quick-test.mp4"></video>
+
+
+3. Что НЕ трогать без нужды
+---------------------------
+
+assets\      - оформление сайта: фон, аватар, маскот.
+styles.css   - внешний вид сайта.
+script.js    - логика сайта.
+index.html   - каркас сайта.
+
+Если хочешь просто написать новый гайд, эти файлы не нужны.
+
+
+4. Как добавить новую страницу в меню
+-------------------------------------
+
+Допустим, нужна английская страница:
+guides\en\get-started\first-export.md
+
+И русская:
+guides\ru\get-started\first-export.md
+
+Потом открой:
+guides\manifest.json
+
+Найди нужный раздел и добавь страницу по примеру:
+
+{
+  "slug": "first-export",
+  "title": "First Export",
+  "description": "First successful RZMenu export",
+  "file": "guides/en/get-started/first-export.md"
+}
+
+Для русской версии добавляй в ru:
+
+{
+  "slug": "first-export",
+  "title": "Первый экспорт",
+  "description": "Первый успешный экспорт через RZMenu",
+  "file": "guides/ru/get-started/first-export.md"
+}
+
+Важно: slug у английской и русской версии лучше держать одинаковым.
+
+
+5. Как обновлять сайт через GUI
+-------------------------------
+
+Самый простой вариант: GitHub Desktop.
+
+Открываешь GitHub Desktop.
+File -> Add local repository.
+Выбираешь папку:
+C:\Users\Rayvy\Documents\GitHub\RZMenu-Guide
+
+Когда изменил файлы:
+1. Открой GitHub Desktop.
+2. Слева увидишь изменённые файлы.
+3. Внизу в поле Summary напиши коротко, что поменял.
+   Пример: Update installation guide
+4. Нажми Commit to main.
+5. Нажми Push origin.
+
+После Push сайт сам деплоится через GitHub Actions.
+Обычно надо подождать 1-2 минуты.
+
+
+6. Как понять, что сайт обновился
+---------------------------------
+
+Открой:
+https://github.com/rayvy/RZMenu-Guide/actions
+
+Если последний запуск зелёный, деплой прошёл.
+
+Потом открывай:
+https://rayvy.github.io/RZMenu-Guide/
+
+Если браузер показывает старую версию:
+Ctrl + F5
+
+
+7. Файлопомойка
+---------------
+
+Да, репозиторий можно использовать как склад файлов.
+
+Скачиваемые файлы:
+asset-dump\files\
+
+Превью:
+asset-dump\previews\
+
+Каталог:
+asset-dump\catalog.json
+
+Пример записи:
+
+{
+  "name": "Example Theme",
+  "type": "theme",
+  "author": "Rayvich",
+  "uploader": "rayvy",
+  "description": "Пример темы для RZMenu.",
+  "file": "asset-dump/files/example-theme.rzm",
+  "preview": "asset-dump/previews/example-theme.png"
+}
+
+Можно добавлять через Python:
+python tools\add_asset.py
+
+Скрипт спросит имя, автора, описание, путь к файлу и превью.
+После этого всё равно нужно сделать Commit и Push через GitHub Desktop.
+
+
+8. Мини-план развития
+---------------------
+
+1. Достать твои объяснения из Discord и раскидать их по разделам.
+2. Сделать Get Started: установка, первый импорт, первый экспорт, типичные ошибки.
+3. Сделать Code Examples: модули, темы, VFX, паттерны для кастомизации.
+4. Наполнить Файлопомойку реальными файлами и превью.
+5. Добавить страницу "Known Pain" или "Troubleshooting" для ошибок, которые постоянно ловят новички.
+6. Позже сделать Python-скрипт умнее: чтобы он сам копировал файл/превью в нужные папки и обновлял catalog.json.

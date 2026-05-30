@@ -1,29 +1,36 @@
+const DEFAULT_LANG = "en";
+const DEFAULT_SECTION = "get-started";
+
 const state = {
   manifest: null,
-  lang: "ru",
-  slug: "home",
+  lang: DEFAULT_LANG,
+  section: DEFAULT_SECTION,
+  page: null,
 };
 
-const copy = {
-  ru: {
-    guides: "Гайды",
-    loading: "Загрузка гайда...",
-    missing: "Гайд не найден",
-    missingBody: "Проверь guides/manifest.json и имя Markdown-файла.",
-  },
+const ui = {
   en: {
-    guides: "Guides",
-    loading: "Loading guide...",
-    missing: "Guide not found",
+    loading: "Loading...",
+    missing: "Page not found",
     missingBody: "Check guides/manifest.json and the Markdown filename.",
+    assetsEmpty: "No assets in the dump yet.",
+  },
+  ru: {
+    loading: "Грузим мануал...",
+    missing: "Страница потерялась",
+    missingBody: "Проверь guides/manifest.json и имя Markdown-файла.",
+    assetsEmpty: "Файлопомойка пока пустая.",
   },
 };
 
-const nav = document.querySelector("#guide-nav");
+const tabs = document.querySelector("#section-tabs");
+const pageNav = document.querySelector("#page-nav");
 const content = document.querySelector("#guide-content");
 const loading = document.querySelector("#loading");
-const sidebarKicker = document.querySelector("#sidebar-kicker");
-const sidebarTitle = document.querySelector("#sidebar-title");
+const brandSubtitle = document.querySelector("#brand-subtitle");
+const sideKicker = document.querySelector("#side-kicker");
+const sideTitle = document.querySelector("#side-title");
+const mascotImage = document.querySelector("#mascot-image");
 const langLinks = document.querySelectorAll("[data-lang]");
 
 init();
@@ -42,57 +49,84 @@ async function init() {
 async function renderRoute() {
   const route = parseRoute();
   state.lang = route.lang;
-  state.slug = route.slug;
+  state.section = route.section;
+  state.page = route.page;
   document.documentElement.lang = state.lang;
 
+  normalizeRoute();
   updateChrome();
-  renderNav();
-  await renderGuide();
+  renderTabs();
+  renderPageNav();
+  await renderPage();
 }
 
 function parseRoute() {
   const parts = window.location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
-  const lang = parts[0] === "en" ? "en" : "ru";
-  const slug = parts[1] || "home";
-  return { lang, slug };
+  return {
+    lang: parts[0] === "ru" ? "ru" : "en",
+    section: parts[1] || DEFAULT_SECTION,
+    page: parts[2] || null,
+  };
+}
+
+function normalizeRoute() {
+  const section = getSection();
+  if (!section) {
+    window.location.hash = `#/${state.lang}/${DEFAULT_SECTION}`;
+    return;
+  }
+
+  if (!state.page && section.pages?.length) {
+    state.page = section.pages[0].slug;
+    history.replaceState(null, "", `#/${state.lang}/${state.section}/${state.page}`);
+  }
 }
 
 function updateChrome() {
-  const labels = copy[state.lang];
-  sidebarKicker.textContent = labels.guides;
-  sidebarTitle.textContent = state.manifest.title[state.lang] || "RZMenu";
+  const section = getSection();
+  const labels = ui[state.lang];
+  const langMeta = state.manifest.languages[state.lang];
   loading.textContent = labels.loading;
+  brandSubtitle.textContent = langMeta.subtitle;
+  sideKicker.textContent = section?.kicker || langMeta.kicker;
+  sideTitle.textContent = section?.title || "RZMenu";
+  mascotImage.src = section?.mascot || "assets/ray_chan_pointing_ai_slop.png";
 
   langLinks.forEach(link => {
     const lang = link.dataset.lang;
     link.classList.toggle("active", lang === state.lang);
-    link.href = `#/${lang}/${state.slug}`;
+    link.href = `#/${lang}/${state.section}/${state.page || ""}`;
   });
 }
 
-function renderNav() {
-  const guides = getGuides();
-  nav.innerHTML = guides.map(guide => {
-    const active = guide.slug === state.slug ? "active" : "";
+function renderTabs() {
+  const sections = getSections();
+  tabs.innerHTML = sections.map(section => {
+    const active = section.slug === state.section ? "active" : "";
+    const firstPage = section.pages?.[0]?.slug || "index";
+    return `<a class="${active}" href="#/${state.lang}/${section.slug}/${firstPage}">${escapeHtml(section.title)}</a>`;
+  }).join("");
+}
+
+function renderPageNav() {
+  const section = getSection();
+  const pages = section?.pages || [];
+  pageNav.innerHTML = pages.map(page => {
+    const active = page.slug === state.page ? "active" : "";
     return `
-      <a class="${active}" href="#/${state.lang}/${guide.slug}">
-        <span>${escapeHtml(guide.title)}</span>
-        ${guide.description ? `<small>${escapeHtml(guide.description)}</small>` : ""}
+      <a class="${active}" href="#/${state.lang}/${state.section}/${page.slug}">
+        <span>${escapeHtml(page.title)}</span>
+        ${page.description ? `<small>${escapeHtml(page.description)}</small>` : ""}
       </a>
     `;
   }).join("");
 }
 
-async function renderGuide() {
-  const guide = getGuides().find(item => item.slug === state.slug) || getGuides()[0];
+async function renderPage() {
+  const page = getPage();
 
-  if (!guide) {
-    showError(copy[state.lang].missing, copy[state.lang].missingBody);
-    return;
-  }
-
-  if (guide.slug !== state.slug) {
-    window.location.hash = `#/${state.lang}/${guide.slug}`;
+  if (!page) {
+    showError(ui[state.lang].missing, ui[state.lang].missingBody);
     return;
   }
 
@@ -100,20 +134,68 @@ async function renderGuide() {
   content.hidden = true;
 
   try {
-    const response = await fetch(guide.file, { cache: "no-store" });
+    const response = await fetch(page.file, { cache: "no-store" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const markdown = await response.text();
-    content.innerHTML = renderMarkdown(markdown);
+    let html = renderMarkdown(markdown);
+
+    if (page.type === "assets") {
+      html += await renderAssetCatalog();
+    }
+
+    content.innerHTML = html;
     loading.hidden = true;
     content.hidden = false;
-    document.title = `${guide.title} | RZMenu Guide`;
+    document.title = `${page.title} | RZMenu Guide`;
   } catch (error) {
-    showError(copy[state.lang].missing, `${copy[state.lang].missingBody} (${guide.file})`);
+    showError(ui[state.lang].missing, `${ui[state.lang].missingBody} (${page.file})`);
   }
 }
 
-function getGuides() {
-  return state.manifest.languages[state.lang]?.guides || [];
+async function renderAssetCatalog() {
+  try {
+    const response = await fetch("asset-dump/catalog.json", { cache: "no-store" });
+    const catalog = await response.json();
+    const items = catalog.items || [];
+
+    if (!items.length) {
+      return `<p>${escapeHtml(ui[state.lang].assetsEmpty)}</p>`;
+    }
+
+    return `
+      <div class="asset-grid">
+        ${items.map(item => `
+          <article class="asset-card">
+            ${item.preview ? `<img src="${escapeHtml(item.preview)}" alt="">` : ""}
+            <div>
+              <h3>${escapeHtml(item.name)}</h3>
+              <p>${escapeHtml(item.description || "")}</p>
+              <div class="asset-meta">
+                ${item.author ? `<span>Author: ${escapeHtml(item.author)}</span>` : ""}
+                ${item.uploader ? `<span>Uploaded by: ${escapeHtml(item.uploader)}</span>` : ""}
+                ${item.type ? `<span>${escapeHtml(item.type)}</span>` : ""}
+              </div>
+              <a class="download-link" href="${escapeHtml(item.file)}">Download</a>
+            </div>
+          </article>
+        `).join("")}
+      </div>
+    `;
+  } catch (error) {
+    return `<p>${escapeHtml(ui[state.lang].assetsEmpty)}</p>`;
+  }
+}
+
+function getSections() {
+  return state.manifest.languages[state.lang]?.sections || [];
+}
+
+function getSection() {
+  return getSections().find(section => section.slug === state.section);
+}
+
+function getPage() {
+  return getSection()?.pages?.find(page => page.slug === state.page);
 }
 
 function showError(title, body) {
@@ -219,7 +301,6 @@ function renderMarkdown(markdown) {
   flushParagraph();
   flushList();
   flushQuote();
-
   return html.join("\n");
 }
 
@@ -233,7 +314,7 @@ function renderInline(value) {
 }
 
 function escapeHtml(value) {
-  return value
+  return String(value)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
