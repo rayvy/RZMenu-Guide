@@ -9,6 +9,13 @@ The site is split into four tabs:
 - **Assets**: themes, samples, `.rmzct`, `.rzm`, previews, and other useful files.
 - **Support Me**: Rayvich links and support notes.
 
+Recommended first path:
+
+1. Read **Installation**.
+2. Build the **First Menu**.
+3. Bind **Toggles and Textures**.
+4. Check **FAQ** before assuming the tool is haunted.
+
 ## How to write guides
 
 You write guides as plain Markdown files. No HTML skills required for normal text.

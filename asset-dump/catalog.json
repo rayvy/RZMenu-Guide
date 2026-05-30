@@ -1,3 +1,13 @@
 {
-  "items": []
+  "items": [
+    {
+      "name": "circle_counter_max8",
+      "type": "rzmt template",
+      "author": "Rayvich",
+      "uploader": "rayvy",
+      "description": "A circular counter template for RZMenu. Made for RZMenu 3.6.",
+      "file": "asset-dump/files/circle_counter_max8.rzmt",
+      "preview": "asset-dump/previews/circle_counter_max8.png"
+    }
+  ]
 }

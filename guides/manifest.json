@@ -21,6 +21,24 @@
               "title": "Installation",
               "description": "Blender and RZMenu setup",
               "file": "guides/en/get-started/install.md"
+            },
+            {
+              "slug": "first-menu",
+              "title": "First Menu",
+              "description": "Build a basic RZMenu layout",
+              "file": "guides/en/get-started/first-menu.md"
+            },
+            {
+              "slug": "toggles-textures",
+              "title": "Toggles and Textures",
+              "description": "Assign mesh toggles and texture slots",
+              "file": "guides/en/get-started/toggles-textures.md"
+            },
+            {
+              "slug": "faq",
+              "title": "FAQ",
+              "description": "Common export questions and expected pain",
+              "file": "guides/en/get-started/faq.md"
             }
           ]
         },
@@ -35,6 +53,12 @@
               "title": "Snippets",
               "description": "Small examples and patterns",
               "file": "guides/en/code-examples/snippets.md"
+            },
+            {
+              "slug": "animation-math",
+              "title": "Animation Math",
+              "description": "Formula snippets for motion and interaction",
+              "file": "guides/en/code-examples/animation-math.md"
             }
           ]
         },
@@ -96,6 +120,24 @@
               "title": "Установка",
               "description": "Blender и RZMenu без шаманства",
               "file": "guides/ru/get-started/install.md"
+            },
+            {
+              "slug": "first-menu",
+              "title": "Первая менюшка",
+              "description": "Собираем базовую RZMenu-конструкцию",
+              "file": "guides/ru/get-started/first-menu.md"
+            },
+            {
+              "slug": "toggles-textures",
+              "title": "Тогглы и текстурки",
+              "description": "Привязка мешей, битмаски и TexSlots",
+              "file": "guides/ru/get-started/toggles-textures.md"
+            },
+            {
+              "slug": "faq",
+              "title": "ФАКЬЮ",
+              "description": "Ответы на вопросы, которые уже болели",
+              "file": "guides/ru/get-started/faq.md"
             }
           ]
         },
@@ -110,6 +152,12 @@
               "title": "Сниппеты",
               "description": "Маленькие куски кода и примеры",
               "file": "guides/ru/code-examples/snippets.md"
+            },
+            {
+              "slug": "animation-math",
+              "title": "Математика анимаций",
+              "description": "Формулы для движения, клика и прочей магии",
+              "file": "guides/ru/code-examples/animation-math.md"
             }
           ]
         },
