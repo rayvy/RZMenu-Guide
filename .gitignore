@@ -1,5 +1,6 @@
-.DS_Store
-Thumbs.db
-.vscode/
+trash-stuff/
+*.log
+*.tmp
+*.cache
 __pycache__/
-*.pyc
+.DS_Store

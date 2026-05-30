@@ -21,20 +21,56 @@
               "title": "Installation",
               "description": "Blender and RZMenu setup",
               "file": "guides/en/get-started/install.md"
+            },
+            {
+              "slug": "first-menu",
+              "title": "First Menu",
+              "description": "Build a basic RZMenu layout",
+              "file": "guides/en/get-started/first-menu.md"
+            },
+            {
+              "slug": "toggles-textures",
+              "title": "Toggles and Textures",
+              "description": "Assign mesh toggles and texture slots",
+              "file": "guides/en/get-started/toggles-textures.md"
+            },
+            {
+              "slug": "faq",
+              "title": "FAQ",
+              "description": "Common export questions and expected pain",
+              "file": "guides/en/get-started/faq.md"
             }
           ]
         },
         {
           "slug": "code-examples",
-          "title": "Code Examples",
+          "title": "Examples and other stuff",
           "kicker": "Copy, paste, suffer less",
-          "mascot": "assets/ray_chan_freaky_ai_slop.png",
+          "mascot": "assets/ray_chan_thinking_ai_slop.png",
           "pages": [
             {
-              "slug": "snippets",
-              "title": "Snippets",
-              "description": "Small examples and patterns",
-              "file": "guides/en/code-examples/snippets.md"
+              "slug": "animation-math",
+              "title": "Animation Math",
+              "description": "Formula snippets for motion and interaction",
+              "file": "guides/en/code-examples/animation-math.md"
+            },
+            {
+              "slug": "tips",
+              "title": "Tips",
+              "description": "Useful tricks, habits, and low-drama advice",
+              "file": "guides/en/code-examples/tips.md"
+            },
+            {
+              "slug": "cool-thing",
+              "title": "How to Make a Cool Thing",
+              "description": "A practical build-through for nicer menus",
+              "file": "guides/en/code-examples/cool-thing.md"
+            },
+            {
+              "slug": "misc",
+              "title": "Misc",
+              "description": "Random notes and leftovers",
+              "file": "guides/en/code-examples/misc.md"
             }
           ]
         },
@@ -46,14 +82,14 @@
           "pages": [
             {
               "slug": "library",
-              "title": "Library",
-              "description": "Themes, samples, .rmzct and .rzm files",
+              "title": "Warehouse",
+              "description": "Themes, samples, .rzm, .rzmt, and .rzmct files",
               "file": "guides/en/assets/library.md",
               "type": "assets"
             },
             {
               "slug": "submit",
-              "title": "Submit Asset",
+              "title": "How to Submit",
               "description": "How to add files to the dump",
               "file": "guides/en/assets/submit.md"
             }
@@ -63,11 +99,11 @@
           "slug": "support-me",
           "title": "Support Me",
           "kicker": "Keep the tool alive",
-          "mascot": "assets/ray_chan_freaky_ai_slop.png",
+          "mascot": "assets/ray_chand_depressed_alcoholic_ai_slop.png",
           "pages": [
             {
               "slug": "support",
-              "title": "Support",
+              "title": "Support Notes",
               "description": "Rayvich links and notes",
               "file": "guides/en/support-me/support.md"
             }
@@ -96,20 +132,56 @@
               "title": "Установка",
               "description": "Blender и RZMenu без шаманства",
               "file": "guides/ru/get-started/install.md"
+            },
+            {
+              "slug": "first-menu",
+              "title": "Первая менюшка",
+              "description": "Собираем базовую RZMenu-конструкцию",
+              "file": "guides/ru/get-started/first-menu.md"
+            },
+            {
+              "slug": "toggles-textures",
+              "title": "Тогглы и текстурки",
+              "description": "Привязка мешей, битмаски и TexSlots",
+              "file": "guides/ru/get-started/toggles-textures.md"
+            },
+            {
+              "slug": "faq",
+              "title": "ФАКЬЮ",
+              "description": "Ответы на вопросы, которые уже болели",
+              "file": "guides/ru/get-started/faq.md"
             }
           ]
         },
         {
           "slug": "code-examples",
-          "title": "Код-Залупы",
+          "title": "Примеры-и-прочая-хуйня",
           "kicker": "Скопировал, помолился",
-          "mascot": "assets/ray_chan_freaky_ai_slop.png",
+          "mascot": "assets/ray_chan_thinking_ai_slop.png",
           "pages": [
             {
-              "slug": "snippets",
-              "title": "Сниппеты",
-              "description": "Маленькие куски кода и примеры",
-              "file": "guides/ru/code-examples/snippets.md"
+              "slug": "animation-math",
+              "title": "Математика анимаций",
+              "description": "Формулы для движения, клика и прочей магии",
+              "file": "guides/ru/code-examples/animation-math.md"
+            },
+            {
+              "slug": "tips",
+              "title": "Советы",
+              "description": "Шпаргалки, привычки и полезные мелочи",
+              "file": "guides/ru/code-examples/tips.md"
+            },
+            {
+              "slug": "cool-thing",
+              "title": "Как сделать крутую штуку",
+              "description": "Практический разбор более приятного меню",
+              "file": "guides/ru/code-examples/cool-thing.md"
+            },
+            {
+              "slug": "misc",
+              "title": "Прочее",
+              "description": "Разные заметки и хвосты",
+              "file": "guides/ru/code-examples/misc.md"
             }
           ]
         },
@@ -122,7 +194,7 @@
             {
               "slug": "library",
               "title": "Склад",
-              "description": "Темы, примеры, .rmzct и .rzm файлы",
+              "description": "Темы, примеры, .rzm, .rzmt и .rzmct файлы",
               "file": "guides/ru/assets/library.md",
               "type": "assets"
             },
@@ -138,11 +210,11 @@
           "slug": "support-me",
           "title": "ЕслиНеЖалко",
           "kicker": "Поддержка автора",
-          "mascot": "assets/ray_chan_freaky_ai_slop.png",
+          "mascot": "assets/ray_chand_depressed_alcoholic_ai_slop.png",
           "pages": [
             {
               "slug": "support",
-              "title": "Поддержать",
+              "title": "КакаяТоХуйня",
               "description": "Rayvich, GitHub и прочее",
               "file": "guides/ru/support-me/support.md"
             }

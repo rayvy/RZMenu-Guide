@@ -1,13 +1,19 @@
-# Submit Asset
+# How to Submit
 
-To add an asset manually:
+Keep it simple:
 
-1. Put the downloadable file into `asset-dump/files/`.
-2. Put a preview image into `asset-dump/previews/`.
-3. Add a new entry to `asset-dump/catalog.json`.
+1. Put the downloadable file in `asset-dump/files/`.
+2. Put a preview image in `asset-dump/previews/`.
+3. Add a row to `asset-dump/catalog.json`.
 4. Commit and push.
 
-Example catalog entry:
+## File types
+
+- `.rzm` is a full save you can move around as a complete package.
+- `.rzmt` is a snippet or template chunk.
+- `.rzmct` is the future auto-menu generation system. It exists, but it is not finished yet.
+
+Example entry:
 
 ```json
 {
@@ -21,4 +27,4 @@ Example catalog entry:
 }
 ```
 
-Later this can be automated with a small Python helper so you fill in prompts instead of editing JSON by hand.
+That is the whole job. The warehouse page reads the catalog and renders the cards directly.

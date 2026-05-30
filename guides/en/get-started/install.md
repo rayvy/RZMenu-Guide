@@ -1,23 +1,23 @@
 # Installation
 
-This is a starter page. Replace the placeholders with your real Discord-tested instructions later.
+RZMenu is distributed as a ZIP archive from the main GitHub repo:
 
-## 1. Install the correct Blender version
+[rayvy/RZMenu](https://github.com/rayvy/RZMenu)
 
-Use the Blender version expected by your current RZMenu build. If the tool targets Blender 5.0, start with Blender 5.0.
+Do not rely on the GameBanana page for updates. It exists, but the current builds live on GitHub.
 
-## 2. Install RZMenu
+## What matters first
 
-Copy the add-on folder into Blender's add-ons directory.
+1. Download the `.zip` archive from GitHub.
+2. Install or update the add-on in Blender.
+3. Open the add-on preferences.
+4. Click **Install All Missing** in the dependencies panel.
+5. Restart Blender after the packages are installed.
 
-```text
-Blender Foundation/Blender/5.0/scripts/addons/RZMenu
-```
+If the editor button does not appear, run the dependency install again and restart Blender once more. That is usually the least interesting failure mode.
 
-## 3. Enable the add-on
+## Optional but useful
 
-Open Blender, go to Add-ons, search for RZMenu, and enable it.
-
-## 4. Run a small test
-
-Before touching a serious model, import a small sample and export it once. The first goal is not beauty. The first goal is proof that the pipeline is alive.
+- `RZ Construct Debug` exists for people who want to suffer on purpose.
+- If the add-on reports missing packages, trust the panel instead of guessing.
+- If you update the add-on, give Blender a clean restart before judging the result.

@@ -31,6 +31,7 @@ const brandSubtitle = document.querySelector("#brand-subtitle");
 const sideKicker = document.querySelector("#side-kicker");
 const sideTitle = document.querySelector("#side-title");
 const mascotImage = document.querySelector("#mascot-image");
+const contentPanel = document.querySelector(".content-panel");
 const langLinks = document.querySelectorAll("[data-lang]");
 
 init();
@@ -53,7 +54,10 @@ async function renderRoute() {
   state.page = route.page;
   document.documentElement.lang = state.lang;
 
-  normalizeRoute();
+  if (!normalizeRoute()) {
+    return;
+  }
+
   updateChrome();
   renderTabs();
   renderPageNav();
@@ -70,27 +74,61 @@ function parseRoute() {
 }
 
 function normalizeRoute() {
-  const section = getSection();
+  const section = resolveSection(state.lang, state.section);
+
   if (!section) {
+    const fallbackLang = getAlternateLang(state.lang);
+    const fallbackSection = resolveSection(fallbackLang, state.section);
+    if (fallbackSection) {
+      state.lang = fallbackLang;
+      state.section = fallbackSection.slug;
+      state.page = fallbackSection.pages?.[0]?.slug || null;
+      history.replaceState(null, "", `#/${state.lang}/${state.section}/${state.page || ""}`);
+      return true;
+    }
+
     window.location.hash = `#/${state.lang}/${DEFAULT_SECTION}`;
-    return;
+    return false;
   }
 
   if (!state.page && section.pages?.length) {
     state.page = section.pages[0].slug;
     history.replaceState(null, "", `#/${state.lang}/${state.section}/${state.page}`);
+    return true;
   }
+
+  if (state.page && !resolvePage(state.lang, state.section, state.page)) {
+    const fallbackLang = getAlternateLang(state.lang);
+    const fallbackPage = resolvePage(fallbackLang, state.section, state.page);
+    if (fallbackPage) {
+      state.lang = fallbackLang;
+      history.replaceState(null, "", `#/${state.lang}/${state.section}/${state.page}`);
+      return true;
+    }
+
+    state.page = section.pages?.[0]?.slug || null;
+    history.replaceState(null, "", `#/${state.lang}/${state.section}/${state.page || ""}`);
+  }
+
+  return true;
+}
+
+function getAlternateLang(lang) {
+  return lang === "en" ? "ru" : "en";
 }
 
 function updateChrome() {
   const section = getSection();
   const labels = ui[state.lang];
   const langMeta = state.manifest.languages[state.lang];
+
   loading.textContent = labels.loading;
   brandSubtitle.textContent = langMeta.subtitle;
   sideKicker.textContent = section?.kicker || langMeta.kicker;
   sideTitle.textContent = section?.title || "RZMenu";
   mascotImage.src = section?.mascot || "assets/ray_chan_pointing_ai_slop.png";
+  contentPanel.dataset.section = section?.slug || "";
+  contentPanel.dataset.page = state.page || "";
 
   langLinks.forEach(link => {
     const lang = link.dataset.lang;
@@ -156,46 +194,123 @@ async function renderAssetCatalog() {
   try {
     const response = await fetch("asset-dump/catalog.json", { cache: "no-store" });
     const catalog = await response.json();
-    const items = catalog.items || [];
+    const items = sortAssets(catalog.items || []);
 
     if (!items.length) {
-      return `<p>${escapeHtml(ui[state.lang].assetsEmpty)}</p>`;
+      return `<p class="warehouse-note">${escapeHtml(ui[state.lang].assetsEmpty)}</p>`;
     }
 
-    return `
-      <div class="asset-grid">
-        ${items.map(item => `
-          <article class="asset-card">
-            ${item.preview ? `<img src="${escapeHtml(item.preview)}" alt="">` : ""}
-            <div>
-              <h3>${escapeHtml(item.name)}</h3>
-              <p>${escapeHtml(item.description || "")}</p>
-              <div class="asset-meta">
-                ${item.author ? `<span>Author: ${escapeHtml(item.author)}</span>` : ""}
-                ${item.uploader ? `<span>Uploaded by: ${escapeHtml(item.uploader)}</span>` : ""}
-                ${item.type ? `<span>${escapeHtml(item.type)}</span>` : ""}
-              </div>
-              <a class="download-link" href="${escapeHtml(item.file)}">Download</a>
-            </div>
-          </article>
-        `).join("")}
-      </div>
-    `;
+    const groups = groupAssets(items);
+    return groups.map(group => `
+      <section class="warehouse-group">
+        <h2>${escapeHtml(group.label)}</h2>
+        <div class="warehouse-row">
+          ${group.items.map(item => renderAssetCard(item)).join("")}
+        </div>
+      </section>
+    `).join("");
   } catch (error) {
-    return `<p>${escapeHtml(ui[state.lang].assetsEmpty)}</p>`;
+    return `<p class="warehouse-note">${escapeHtml(ui[state.lang].assetsEmpty)}</p>`;
   }
 }
 
-function getSections() {
-  return state.manifest.languages[state.lang]?.sections || [];
+function renderAssetCard(item) {
+  const ext = item.ext || getFileExt(item.file);
+  const typeLabel = item.type || ext || "asset";
+  return `
+    <article class="warehouse-card">
+      ${item.preview ? `<img src="${escapeHtml(item.preview)}" alt="">` : `<div class="warehouse-preview"></div>`}
+      <div>
+        <h3>${escapeHtml(item.name)}</h3>
+        <p>${escapeHtml(item.description || "")}</p>
+        <div class="warehouse-meta">
+          ${item.author ? `<span>Author: ${escapeHtml(item.author)}</span>` : ""}
+          ${item.uploader ? `<span>Uploaded by: ${escapeHtml(item.uploader)}</span>` : ""}
+          ${ext ? `<span>${escapeHtml(ext)}</span>` : ""}
+          ${typeLabel ? `<span>${escapeHtml(typeLabel)}</span>` : ""}
+        </div>
+        <a class="download-link" href="${escapeHtml(item.file)}">Download</a>
+      </div>
+    </article>
+  `;
+}
+
+function sortAssets(items) {
+  const order = [".rzm", ".rzmt", ".rzmct"];
+  return [...items].sort((a, b) => {
+    const extA = getFileExt(a.file);
+    const extB = getFileExt(b.file);
+    const rankA = order.indexOf(extA);
+    const rankB = order.indexOf(extB);
+
+    if (rankA !== rankB) {
+      return (rankA === -1 ? order.length : rankA) - (rankB === -1 ? order.length : rankB);
+    }
+
+    return String(a.name || "").localeCompare(String(b.name || ""));
+  });
+}
+
+function groupAssets(items) {
+  const buckets = new Map();
+  const labels = new Map([
+    [".rzm", {
+      en: "Full saves (.rzm)",
+      ru: "Полные сохранения (.rzm)",
+    }],
+    [".rzmt", {
+      en: "Templates and chunks (.rzmt)",
+      ru: "Шаблоны и куски (.rzmt)",
+    }],
+    [".rzmct", {
+      en: "Future menu generator (.rzmct)",
+      ru: "Будущая автогенерация (.rzmct)",
+    }],
+    ["other", {
+      en: "Other files",
+      ru: "Другое",
+    }],
+  ]);
+
+  for (const item of items) {
+    const ext = getFileExt(item.file);
+    const key = [".rzm", ".rzmt", ".rzmct"].includes(ext) ? ext : "other";
+    if (!buckets.has(key)) {
+      buckets.set(key, []);
+    }
+    buckets.get(key).push(item);
+  }
+
+  return [".rzm", ".rzmt", ".rzmct", "other"].filter(key => buckets.has(key)).map(key => ({
+    key,
+    label: labels.get(key)?.[state.lang] || labels.get(key)?.en || key,
+    items: buckets.get(key),
+  }));
+}
+
+function getFileExt(file) {
+  const match = String(file || "").match(/(\.[a-z0-9]+)$/i);
+  return match ? match[1].toLowerCase() : "";
+}
+
+function getSections(lang = state.lang) {
+  return state.manifest.languages[lang]?.sections || [];
+}
+
+function resolveSection(lang, slug) {
+  return getSections(lang).find(section => section.slug === slug);
+}
+
+function resolvePage(lang, sectionSlug, pageSlug) {
+  return resolveSection(lang, sectionSlug)?.pages?.find(page => page.slug === pageSlug);
 }
 
 function getSection() {
-  return getSections().find(section => section.slug === state.section);
+  return resolveSection(state.lang, state.section);
 }
 
 function getPage() {
-  return getSection()?.pages?.find(page => page.slug === state.page);
+  return resolvePage(state.lang, state.section, state.page);
 }
 
 function showError(title, body) {
@@ -258,7 +373,7 @@ function renderMarkdown(markdown) {
       continue;
     }
 
-    if (line.startsWith("<")) {
+    if (line.trimStart().startsWith("<")) {
       flushParagraph();
       flushList();
       flushQuote();
