@@ -1,11 +1,24 @@
 # RZMenu Guide
 
-Статический сайт с русскоязычными инструкциями по моддингу и работе с RZMenu.
+Static bilingual guide site for RZMenu modding.
 
-## Локальный просмотр
+## Writing guides
 
-Открой `index.html` в браузере.
+Guides are plain Markdown files:
 
-## Публикация
+- Russian: `guides/ru/*.md`
+- English: `guides/en/*.md`
 
-Сайт публикуется через GitHub Pages из workflow `.github/workflows/pages.yml`.
+The sidebar menu is controlled by `guides/manifest.json`.
+
+Put screenshots, gifs, and videos in `media/`, then reference them from Markdown:
+
+```md
+![Screenshot](media/screenshot.png)
+
+<video controls src="media/demo.mp4"></video>
+```
+
+## Publishing
+
+Push to `main`. GitHub Actions deploys the site to GitHub Pages automatically.

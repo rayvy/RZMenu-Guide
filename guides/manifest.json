@@ -1,0 +1,52 @@
+{
+  "title": {
+    "ru": "RZMenu",
+    "en": "RZMenu"
+  },
+  "languages": {
+    "ru": {
+      "guides": [
+        {
+          "slug": "home",
+          "title": "Главная",
+          "description": "Как устроен сайт и где писать гайды",
+          "file": "guides/ru/home.md"
+        },
+        {
+          "slug": "install",
+          "title": "Установка",
+          "description": "Базовая установка Blender и RZMenu",
+          "file": "guides/ru/install.md"
+        },
+        {
+          "slug": "media",
+          "title": "Картинки и видео",
+          "description": "Как вставлять скриншоты, гифки и mp4",
+          "file": "guides/ru/media.md"
+        }
+      ]
+    },
+    "en": {
+      "guides": [
+        {
+          "slug": "home",
+          "title": "Home",
+          "description": "How this site works",
+          "file": "guides/en/home.md"
+        },
+        {
+          "slug": "install",
+          "title": "Installation",
+          "description": "Basic Blender and RZMenu setup",
+          "file": "guides/en/install.md"
+        },
+        {
+          "slug": "media",
+          "title": "Images and video",
+          "description": "Screenshots, gifs, and mp4 embeds",
+          "file": "guides/en/media.md"
+        }
+      ]
+    }
+  }
+}

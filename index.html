@@ -4,145 +4,39 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RZMenu Guide</title>
-    <meta name="description" content="Русскоязычный справочник по моддингу, установке и рабочему процессу RZMenu.">
+    <meta name="description" content="Markdown-based bilingual guide site for RZMenu modding.">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header class="topbar">
-      <a class="brand" href="#start" aria-label="RZMenu Guide">
+      <a class="brand" href="#/ru/home" aria-label="RZMenu Guide">
         <span class="brand-mark">RZ</span>
         <span>RZMenu Guide</span>
       </a>
-      <nav class="nav" aria-label="Навигация">
-        <a href="#start">Старт</a>
-        <a href="#setup">Установка</a>
-        <a href="#workflow">Процесс</a>
-        <a href="#troubleshooting">Ошибки</a>
-      </nav>
+
+      <div class="top-actions">
+        <nav class="lang-switch" aria-label="Language">
+          <a data-lang="ru" href="#/ru/home">RU</a>
+          <a data-lang="en" href="#/en/home">EN</a>
+        </nav>
+        <a class="repo-link" href="https://github.com/rayvy/RZMenu-Guide">GitHub</a>
+      </div>
     </header>
 
-    <main>
-      <section id="start" class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Моддинг без лишней магии</p>
-          <h1>Инструкции и туториалы для RZMenu</h1>
-          <p class="lead">
-            Пошаговая база знаний для установки, настройки, проверки экспортов и
-            разбора типичных проблем при работе с модами.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#setup">Начать установку</a>
-            <a class="button secondary" href="#checklist">Открыть чеклист</a>
-          </div>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="sidebar-heading">
+          <span id="sidebar-kicker">Guides</span>
+          <strong id="sidebar-title">RZMenu</strong>
         </div>
-        <aside class="status-panel" aria-label="Краткий рабочий порядок">
-          <h2>Быстрый порядок</h2>
-          <ol>
-            <li>Подготовить Blender и аддон.</li>
-            <li>Проверить структуру папок мода.</li>
-            <li>Импортировать модель и текстуры.</li>
-            <li>Экспортировать и проверить в игре.</li>
-          </ol>
-        </aside>
-      </section>
+        <nav id="guide-nav" class="guide-nav" aria-label="Guides"></nav>
+      </aside>
 
-      <section id="setup" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Установка</p>
-          <h2>Что поставить перед началом</h2>
-        </div>
-        <div class="grid three">
-          <article class="card">
-            <span class="card-index">01</span>
-            <h3>Blender</h3>
-            <p>Используй версию Blender, под которую собран текущий RZMenu. Если проект уже привязан к Blender 5.0, ставь именно её.</p>
-          </article>
-          <article class="card">
-            <span class="card-index">02</span>
-            <h3>RZMenu</h3>
-            <p>Аддон кладётся в папку scripts/addons, затем включается в настройках Blender через список Add-ons.</p>
-          </article>
-          <article class="card">
-            <span class="card-index">03</span>
-            <h3>Файлы мода</h3>
-            <p>Держи исходники, экспорт и резервные копии отдельно. Это помогает быстро откатиться, если экспорт получился битым.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="workflow" class="section muted">
-        <div class="section-heading">
-          <p class="eyebrow">Рабочий процесс</p>
-          <h2>Базовый туториал</h2>
-        </div>
-        <div class="timeline">
-          <article>
-            <h3>1. Подготовь сцену</h3>
-            <p>Открой Blender, включи RZMenu и убедись, что нужные панели появились в интерфейсе. Перед импортом сохрани чистый файл.</p>
-          </article>
-          <article>
-            <h3>2. Импортируй ассеты</h3>
-            <p>Загрузи модель, текстуры и дополнительные буферы. Проверь, что названия объектов и материалов не потеряли ожидаемые префиксы.</p>
-          </article>
-          <article>
-            <h3>3. Проверь материалы</h3>
-            <p>Сверь diffuse, normal, mask и прочие карты. Ошибки на этом этапе обычно выглядят как чёрная модель, неверный блеск или пропавшие детали.</p>
-          </article>
-          <article>
-            <h3>4. Экспортируй мод</h3>
-            <p>Экспортируй в отдельную папку, не поверх исходников. После экспорта сравни список файлов с рабочим примером.</p>
-          </article>
-          <article>
-            <h3>5. Тестируй в игре</h3>
-            <p>Запускай игру с минимальным набором активных модов. Если проблема исчезла, конфликт был в другом моде или порядке загрузки.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="checklist" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Чеклист</p>
-          <h2>Перед публикацией мода</h2>
-        </div>
-        <div class="checklist">
-          <label><input type="checkbox"> Мод запускается без ошибок в чистой сборке.</label>
-          <label><input type="checkbox"> Все текстуры лежат в нужных папках.</label>
-          <label><input type="checkbox"> Нет временных файлов, дублей и старых экспортов.</label>
-          <label><input type="checkbox"> README содержит установку, совместимость и список известных проблем.</label>
-          <label><input type="checkbox"> Есть скриншоты результата и версия мода.</label>
-        </div>
-      </section>
-
-      <section id="troubleshooting" class="section muted">
-        <div class="section-heading">
-          <p class="eyebrow">Ошибки</p>
-          <h2>Частые проблемы</h2>
-        </div>
-        <div class="faq">
-          <details>
-            <summary>Аддон не появляется в Blender</summary>
-            <p>Проверь путь установки, версию Blender и наличие файла __init__.py в папке аддона. После замены файлов перезапусти Blender.</p>
-          </details>
-          <details>
-            <summary>Модель стала чёрной</summary>
-            <p>Обычно это неверный материал, отсутствующая текстура или несовместимый шейдер. Начни с проверки путей к текстурам.</p>
-          </details>
-          <details>
-            <summary>После экспорта пропали части модели</summary>
-            <p>Проверь группы, имена объектов, привязки и настройки экспорта. Особенно внимательно смотри на объекты с волосами, VFX и прозрачностью.</p>
-          </details>
-          <details>
-            <summary>Игра не загружает мод</summary>
-            <p>Проверь структуру папок, конфликт с другими модами и соответствие версии игры. Запускай тест на минимальном наборе модов.</p>
-          </details>
-        </div>
-      </section>
+      <article class="content">
+        <div id="loading" class="loading">Loading guide...</div>
+        <div id="guide-content" class="markdown" hidden></div>
+      </article>
     </main>
-
-    <footer class="footer">
-      <span>RZMenu Guide</span>
-      <a href="#start">Наверх</a>
-    </footer>
 
     <script src="script.js"></script>
   </body>
