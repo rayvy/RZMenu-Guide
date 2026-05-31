@@ -16,7 +16,7 @@ const ui = {
     assetsEmpty: "No assets in the dump yet.",
   },
   ru: {
-    loading: "Грузим мануал...",
+    loading: "Кто прочитал тот гей...",
     missing: "Страница потерялась",
     missingBody: "Проверь guides/manifest.json и имя Markdown-файла.",
     assetsEmpty: "Файлопомойка пока пустая.",
