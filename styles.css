@@ -409,61 +409,79 @@ a {
 
 .markdown .example-strip {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 18px;
-  padding: 4px 0 12px;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 22px;
+  padding: 8px 0 16px;
 }
 
 .markdown .example-card {
   width: 100%;
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(18, 18, 21, 0.96);
+  background: rgba(22, 22, 25, 0.65);
+  backdrop-filter: blur(12px);
   box-shadow: 0 12px 34px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.markdown .example-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(211, 65, 58, 0.5);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
 }
 
 .markdown .example-card[open] {
   position: relative;
   z-index: 2;
-  border-color: rgba(211, 65, 58, 0.62);
-  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.38);
 }
 
 .markdown .example-card summary {
   display: grid;
-  gap: 14px;
-  padding: 0;
+  gap: 8px;
+  padding: 0 0 12px 0;
+  cursor: default;
 }
 
 .markdown .example-card summary img {
   width: 100%;
-  height: 200px;
+  height: 190px;
   margin: 0;
-  border: 1px solid var(--line);
-  border-radius: calc(var(--radius) - 2px);
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.markdown .example-card:hover summary img {
+  transform: scale(1.02);
 }
 
 .markdown .example-card summary strong {
   display: block;
-  margin-top: 10px;
+  margin-top: 8px;
+  padding: 0 16px;
   color: var(--text);
-  font-size: 24px;
-  line-height: 1.05;
+  font-size: 20px;
+  line-height: 1.15;
 }
 
 .markdown .example-card summary p {
-  margin: 4px 0 0;
-  color: var(--faint);
-  font-size: 15px;
+  margin: 2px 0 0;
+  padding: 0 16px;
+  color: var(--muted);
+  font-size: 14px;
 }
 
 .markdown .example-body {
   display: grid;
   gap: 12px;
-  padding: 0 14px 14px;
+  padding: 0 16px 16px;
+  flex-grow: 1;
 }
 
 .markdown .code-frame {
@@ -682,51 +700,109 @@ a {
 
 .content-panel[data-section="assets"] .markdown .warehouse-row {
   display: grid;
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .content-panel[data-section="assets"] .markdown .warehouse-card {
-  display: grid;
-  grid-template-columns: minmax(240px, 340px) minmax(0, 1fr);
-  gap: 12px;
-  padding: 12px;
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(22, 22, 25, 0.65);
+  backdrop-filter: blur(12px);
   align-items: stretch;
+  overflow: hidden;
+  height: 100%;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.content-panel[data-section="assets"] .markdown .warehouse-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(211, 65, 58, 0.5);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
 
 .content-panel[data-section="assets"] .markdown .warehouse-card img {
   width: 100%;
-  min-height: 180px;
+  height: 170px;
   aspect-ratio: 16 / 9;
   margin: 0;
-  border: 1px solid var(--line);
-  border-radius: calc(var(--radius) - 2px);
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.content-panel[data-section="assets"] .markdown .warehouse-card:hover img {
+  transform: scale(1.02);
 }
 
 .content-panel[data-section="assets"] .markdown .warehouse-card > div {
-  display: grid;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
   gap: 8px;
-  align-content: start;
 }
 
 .content-panel[data-section="assets"] .markdown .warehouse-card h3 {
-  margin-top: 0;
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.content-panel[data-section="assets"] .markdown .warehouse-card p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.4;
+  flex-grow: 1;
 }
 
 .content-panel[data-section="assets"] .markdown .warehouse-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 6px;
+  margin: 4px 0 12px 0;
+}
+
+.content-panel[data-section="assets"] .markdown .warehouse-meta span {
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
   color: var(--faint);
-  font-size: 13px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .content-panel[data-section="assets"] .markdown .download-link {
-  margin-top: 12px;
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  background: var(--red);
+  color: white !important;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.content-panel[data-section="assets"] .markdown .download-link:hover {
+  background: #e04a43;
+}
+
+.content-panel[data-section="assets"] .markdown .download-link:active {
+  transform: scale(0.98);
 }
 
 .content-panel[data-section="support-me"] .markdown .link-cloud {
@@ -826,19 +902,25 @@ a {
   }
 
   .markdown .example-strip {
-    gap: 14px;
-  }
-
-  .markdown .example-card {
-    padding: 12px;
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .markdown .example-card summary img {
-    height: 180px;
+    height: 160px;
   }
 
   .markdown .example-card summary strong {
-    font-size: 20px;
+    font-size: 18px;
+    padding: 0 12px;
+  }
+
+  .markdown .example-card summary p {
+    padding: 0 12px;
+  }
+
+  .markdown .example-body {
+    padding: 0 12px 12px;
   }
 
   .page-hero {
@@ -853,8 +935,21 @@ a {
     text-align: left;
   }
 
-  .content-panel[data-section="assets"] .markdown .warehouse-card {
+  .content-panel[data-section="assets"] .markdown .warehouse-row {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .content-panel[data-section="assets"] .markdown .warehouse-card img {
+    height: 150px;
+  }
+
+  .content-panel[data-section="assets"] .markdown .warehouse-card > div {
+    padding: 12px;
+  }
+
+  .content-panel[data-section="assets"] .markdown .download-link {
+    width: 100%;
   }
 
   .markdown h1 {
