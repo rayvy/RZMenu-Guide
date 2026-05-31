@@ -182,6 +182,8 @@ async function renderPage() {
     }
 
     content.innerHTML = html;
+    wireCopyButtons();
+    wireImageFallbacks();
     loading.hidden = true;
     content.hidden = false;
     document.title = `${page.title} | RZMenu Guide`;
@@ -319,6 +321,41 @@ function showError(title, body) {
   content.innerHTML = `<h1>${escapeHtml(title)}</h1><p>${escapeHtml(body)}</p>`;
 }
 
+function wireCopyButtons() {
+  content.querySelectorAll("[data-copy-code]").forEach(button => {
+    button.addEventListener("click", async () => {
+      const frame = button.closest(".code-frame");
+      const code = frame?.querySelector("code");
+      if (!code) return;
+
+      try {
+        await navigator.clipboard.writeText(code.textContent || "");
+        const original = button.textContent;
+        button.textContent = state.lang === "ru" ? "Скопировано" : "Copied";
+        button.classList.add("copied");
+        window.setTimeout(() => {
+          button.textContent = original;
+          button.classList.remove("copied");
+        }, 1200);
+      } catch (error) {
+        button.textContent = state.lang === "ru" ? "Не скопировалось" : "Copy failed";
+      }
+    });
+  });
+}
+
+function wireImageFallbacks() {
+  const fallback = "assets/ray_chat_tikaet_palkoy_v_kamen.png";
+  content.querySelectorAll("img").forEach(img => {
+    if (img.dataset.fallbackBound === "1") return;
+    img.dataset.fallbackBound = "1";
+    img.addEventListener("error", () => {
+      if (img.src.includes(fallback)) return;
+      img.src = fallback;
+    });
+  });
+}
+
 function renderMarkdown(markdown) {
   const lines = markdown.replace(/\r\n/g, "\n").split("\n");
   const html = [];
@@ -350,7 +387,12 @@ function renderMarkdown(markdown) {
 
     if (code) {
       if (line.startsWith("```")) {
-        html.push(`<pre><code>${escapeHtml(code.lines.join("\n"))}</code></pre>`);
+        html.push(`
+          <div class="code-frame">
+            <button type="button" class="copy-code" data-copy-code>${state.lang === "ru" ? "Копировать" : "Copy"}</button>
+            <pre><code>${escapeHtml(code.lines.join("\n"))}</code></pre>
+          </div>
+        `);
         code = null;
       } else {
         code.lines.push(rawLine);
