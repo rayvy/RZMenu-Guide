@@ -127,11 +127,11 @@ function updateChrome() {
   brandSubtitle.textContent = langMeta.subtitle;
   sideKicker.textContent = section?.kicker || langMeta.kicker;
   sideTitle.textContent = section?.title || "RZMenu";
-  mascotImage.src = section?.mascot || "assets/ray_chan_pointing_ai_slop.png";
+  mascotImage.src = page?.mascot || section?.mascot || "assets/ray_chan_pointing_ai_slop.png";
 
   const mascotCaption = document.querySelector("#mascot-caption");
   if (mascotCaption) {
-    const captionText = page?.hero?.caption;
+    const captionText = page?.caption || page?.hero?.caption;
     if (captionText) {
       mascotCaption.textContent = captionText;
       mascotCaption.hidden = false;
