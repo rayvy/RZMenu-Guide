@@ -33,6 +33,14 @@ const sideTitle = document.querySelector("#side-title");
 const mascotImage = document.querySelector("#mascot-image");
 const contentPanel = document.querySelector(".content-panel");
 const langLinks = document.querySelectorAll("[data-lang]");
+if (mascotImage) {
+  mascotImage.addEventListener("error", () => {
+    const fallback = "assets/ray_chat_tikaet_palkoy_v_kamen.png";
+    if (mascotImage.getAttribute("src") !== fallback) {
+      mascotImage.src = fallback;
+    }
+  });
+}
 
 init();
 
