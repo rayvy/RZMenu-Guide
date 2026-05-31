@@ -116,7 +116,7 @@
               "title": "How to Submit",
               "description": "How to add files to the dump",
               "file": "guides/en/assets/submit.md",
-              "mascot": "assets/ray_chan_kazakhstan_alga.png",
+              "mascot": "assets/ray_chan_pointing_somewhere.png",
               "caption": "Export your .rzm, pack it with a preview, and submit a pull request."
             }
           ]
@@ -165,7 +165,7 @@
               "hero": {
                 "copy": "Если ты тут впервые, сначала Installation. Если уже заблудился, тоже сначала Installation."
               },
-              "caption": "Че припёрся? Читать умеешь или сразу видосы на YouTube побежишь смотреть?"
+              "caption": "ЭЩКЕРЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕ!"
             },
             {
               "slug": "install",
@@ -173,7 +173,7 @@
               "description": "Blender и RZMenu без шаманства",
               "file": "guides/ru/get-started/install.md",
               "mascot": "assets/ray_chan_botan.png",
-              "caption": "Сука, если ты опять установил аддон не в ту папку, я тебе руки оторву."
+              "caption": "Пожалуйста.... Перепроверь пожалуйста в настройках что ты ТОЧНО установил все необходимые пакеты."
             },
             {
               "slug": "first-menu",
@@ -184,14 +184,17 @@
                 "copy": "Это первая настоящая проверка. Если оно работает, дальше уже меньше боли."
               },
               "mascot": "assets/ray_chan_rasteryannya.png",
-              "caption": "Тыкай, блять, аккуратно! Один лишний клик — и вся твоя иерархия пойдёт по пизде."
+              "caption": "Скорее всего ощущения использования данного инструментария будет сравнимо с флюгегехайменом в анальном отверстии"
             },
             {
               "slug": "toggles-textures",
               "title": "Тогглы и текстурки",
               "description": "Привязка мешей, битмаски и TexSlots",
               "file": "guides/ru/get-started/toggles-textures.md",
-              "caption": "Если текстура опять фиолетовая, значит ты зажопил пути прописать, баран."
+              "hero": {
+                "copy": "Я забыл как объявлять комментарии в джсон. Но короче то что я снизу вставил \"Вставить текст\" это типо мета юмор"
+              },
+              "caption": "Вставить текст."
             },
             {
               "slug": "faq",
@@ -199,7 +202,7 @@
               "description": "Ответы на вопросы, которые уже болели",
               "file": "guides/ru/get-started/faq.md",
               "mascot": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png",
-              "caption": "Да блять, открой ты консоль! Там русским языком написано, где ты обосрался."
+              "caption": "SYUKA BLYAATTT!"
             }
           ]
         },
@@ -216,7 +219,7 @@
               "description": "Формулы для движения, клика и прочей магии",
               "file": "guides/ru/code-examples/animation-math.md",
               "mascot": "assets/ray_chan_megamozg.png",
-              "caption": "Формулы ему сложные, блять. В школе надо было физику учить, а не пиво за гаражами пить."
+              "caption": "Если у тебя появилась пиздатая идея, но ты не знаешь как её реализовать... Спроси у нейронки... Ну или отсюда куски кода спизди"
             },
             {
               "slug": "tips",
@@ -224,21 +227,21 @@
               "description": "Шпаргалки, привычки и полезные мелочи",
               "file": "guides/ru/code-examples/tips.md",
               "mascot": "assets/ray_chan_botan.png",
-              "caption": "Включай isolation root, не будь дебилом, а то Blender сдохнет от натуги."
+              "caption": "Так как я дегенерат и не могу нормально оптимизировать тулзу. Мы имеем ебучие лаги. Знаете как я это решила? Просто добавила isolation root чтобы не отрисовывать все элементы... живите с этим)"
             },
             {
               "slug": "cool-thing",
               "title": "Как сделать крутую штуку",
               "description": "Практический разбор более приятного меню",
               "file": "guides/ru/code-examples/cool-thing.md",
-              "caption": "Хуячь плавные кривые, а не этот дёрганый кал, на который смотреть больно."
+              "caption": "Я сомневаюсь что кто-то кроме меня разберётся в этом говне. Нет я не ЧСВшница. Просто навыки UX/UI у меня ниже плинтуса явно."
             },
             {
               "slug": "misc",
               "title": "Прочее",
               "description": "Разные заметки и хвосты",
               "file": "guides/ru/code-examples/misc.md",
-              "caption": "Сюда я свалила всякий мусор, в котором сама чёрт ногу сломит. Разбирайся сам."
+              "caption": "Сюда я свалила всякий мусор, в котором сама не разбираюсь. Удачи ебать..."
             }
           ]
         },
@@ -256,7 +259,7 @@
               "file": "guides/ru/assets/library.md",
               "type": "assets",
               "mascot": "assets/ray_chan_gachi_muchi_jojo_pose_ai_slop.png",
-              "caption": "Спиздил чужую менюшку? Молодец, а теперь завали и иди переделывай под себя."
+              "caption": "Спиздил чужую менюшку? А стой... Автор пока не залил сюда ничего кроме каких то непонятных файлов 5 месячной давности лол"
             },
             {
               "slug": "submit",
@@ -264,7 +267,7 @@
               "description": "Правила добавления файлов",
               "file": "guides/ru/assets/submit.md",
               "mascot": "assets/ray_chan_kazakhstan_alga.png",
-              "caption": "Казахстан алга, блять! Заливай свой архив нормально, без говна в папках."
+              "caption": "Яметекудассай анассыгейн! Я вообще не ебу зачем это страница нужна, сомневаюсь что кто-то что то будет сюда заливать"
             }
           ]
         },
@@ -280,7 +283,7 @@
               "description": "Rayvich, GitHub и прочее",
               "file": "guides/ru/support-me/support.md",
               "mascot": "assets/ray_chan_kissing.png",
-              "caption": "О, донатер! Люблю тебя, сучка. Хоть кто-то ценит мой ебучий труд."
+              "caption": "Можешь оценить мой труд. Я когда разрабатывала эту хуйню, порой бывало ощущение будто меня насилует толпа качков."
             },
             {
               "slug": "thoughts",
@@ -288,7 +291,7 @@
               "description": "Исповедь бухого автора мода",
               "file": "guides/ru/support-me/thoughts.md",
               "mascot": "assets/ray_chand_depressed_alcoholic_ai_slop.png",
-              "caption": "Опять 5 утра, я бухаю пиво и фиксирую баги для людей, которые даже спасибо не скажут."
+              "caption": "Опять 5 утра, разъебанная в труху делаю какую то хуйню потому что в час ночи словила мотивацию."
             }
           ]
         }
