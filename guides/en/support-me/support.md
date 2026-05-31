@@ -13,4 +13,4 @@ I pay attention to feedback, bug reports, and comments under the places listed b
 <a href="https://t.me/rayvich">Telegram: rayvich</a>
 </div>
 
-That is basically the whole support story. There is no fancy donation empire here, just a few links and a very patient maintainer.
+That is basically the whole support story. There is no fancy donation empire here, just a few links and a very patient maintainer. And yeah, even patreon it's not about RZMenu supporting.... it's about porn mods xd
