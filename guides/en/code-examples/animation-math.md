@@ -22,7 +22,6 @@ ease = t * t * (3.0 - 2.0 * t)
 
 <details class="example-card" open>
 <summary>
-<img src="assets/ray_chan_gachi_muchi_jojo_pose_ai_slop.png" alt="Ray-chan ready for a dramatic entrance">
 <strong>Punch-in scale</strong>
 <p>Small overshoot for a button or popup that needs confidence.</p>
 </summary>

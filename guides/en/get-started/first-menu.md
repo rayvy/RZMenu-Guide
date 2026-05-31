@@ -4,8 +4,6 @@ This is the minimum sane flow: create elements, organize them, and stop before y
 
 RZMenu is a Blender add-on helper, not a standalone exporter. It helps you build menu data and UI logic. The final result still has to move through the rest of the mod pipeline.
 
-<img class="hero-inline" src="assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png" alt="Ray-chan having a very normal day">
-
 ## 1. Open the editor
 
 Open the RZMenu panel in Blender and launch the editor. That viewport is where you place menu elements.
@@ -57,4 +55,3 @@ Next step: bind actual toggles and texture slots.
 
 If something appeared after you clicked, or even if the app only lagged in a convincing way, that still counts as progress. Stand up and yell: "VICTORY."
 
-![Ray-chan finale](guide-media/ray-chan-finale.png)

@@ -13,6 +13,4 @@ I pay attention to feedback, bug reports, and comments under the places listed b
 <a href="https://t.me/rayvich">Telegram: rayvich</a>
 </div>
 
-<img class="hero-inline" src="assets/ray_chand_depressed_alcoholic_ai_slop.png" alt="Ray-chan after reading the issue tracker">
-
 That is basically the whole support story. There is no fancy donation empire here, just a few links and a very patient maintainer.

@@ -22,7 +22,6 @@ ease = t * t * (3.0 - 2.0 * t)
 
 <details class="example-card" open>
 <summary>
-<img src="assets/ray_chan_gachi_muchi_jojo_pose_ai_slop.png" alt="Ray-chan пришла драматично">
 <strong>Лёгкий пинок масштаба</strong>
 <p>Маленький overshoot для кнопки или попапа, если им нужна уверенность.</p>
 </summary>

@@ -128,6 +128,19 @@ function updateChrome() {
   sideKicker.textContent = section?.kicker || langMeta.kicker;
   sideTitle.textContent = section?.title || "RZMenu";
   mascotImage.src = section?.mascot || "assets/ray_chan_pointing_ai_slop.png";
+
+  const mascotCaption = document.querySelector("#mascot-caption");
+  if (mascotCaption) {
+    const captionText = page?.hero?.caption;
+    if (captionText) {
+      mascotCaption.textContent = captionText;
+      mascotCaption.hidden = false;
+    } else {
+      mascotCaption.textContent = "";
+      mascotCaption.hidden = true;
+    }
+  }
+
   contentPanel.dataset.section = section?.slug || "";
   contentPanel.dataset.page = state.page || "";
   contentPanel.dataset.layout = page?.layout || section?.layout || "";
@@ -216,18 +229,12 @@ function renderPageHero(page) {
   if (!hero) return "";
 
   const copy = hero.copy || "";
-  const caption = hero.caption || "";
-  const alt = hero.alt || page.title || "";
 
   return `
     <section class="page-hero">
       <div class="page-hero-copy">
         <p>${escapeHtml(copy)}</p>
       </div>
-      <figure class="page-hero-visual">
-        <img src="${escapeHtml(hero.image || "assets/ray_chat_tikaet_palkoy_v_kamen.png")}" alt="${escapeHtml(alt)}">
-        ${caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : ""}
-      </figure>
     </section>
   `;
 }
