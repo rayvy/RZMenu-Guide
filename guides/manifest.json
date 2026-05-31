@@ -14,7 +14,13 @@
               "slug": "overview",
               "title": "Overview",
               "description": "What this site is and how to use it",
-              "file": "guides/en/get-started/overview.md"
+              "file": "guides/en/get-started/overview.md",
+              "hero": {
+                "image": "assets/ray_chan_pointing_ai_slop.png",
+                "alt": "RayChan pointing at the next step",
+                "copy": "Start here, then move to Installation. If you skip that part, the tool will not admire your courage.",
+                "caption": "The calm before the menu starts asking questions."
+              }
             },
             {
               "slug": "install",
@@ -26,7 +32,13 @@
               "slug": "first-menu",
               "title": "First Menu",
               "description": "Build a basic RZMenu layout",
-              "file": "guides/en/get-started/first-menu.md"
+              "file": "guides/en/get-started/first-menu.md",
+              "hero": {
+                "image": "assets/ray_chan_thinking_ai_slop.png",
+                "alt": "RayChan thinking about the first menu",
+                "copy": "This is the first real checkpoint. If it works, the rest gets less stupid.",
+                "caption": "A first menu is where theory starts paying rent."
+              }
             },
             {
               "slug": "toggles-textures",
@@ -48,35 +60,30 @@
           "kicker": "Copy, paste, suffer less",
           "mascot": "assets/ray_chan_thinking_ai_slop.png",
           "layout": "wide",
-          "reaction": "assets/ray_chan_thinking_ai_slop.png",
           "pages": [
             {
               "slug": "animation-math",
               "title": "Animation Math",
               "description": "Formula snippets for motion and interaction",
-              "file": "guides/en/code-examples/animation-math.md",
-              "reaction": "assets/ray_chan_thinking_ai_slop.png"
+              "file": "guides/en/code-examples/animation-math.md"
             },
             {
               "slug": "tips",
               "title": "Tips",
               "description": "Useful tricks, habits, and low-drama advice",
-              "file": "guides/en/code-examples/tips.md",
-              "reaction": "assets/ray_chan_heart.png"
+              "file": "guides/en/code-examples/tips.md"
             },
             {
               "slug": "cool-thing",
               "title": "How to Make a Cool Thing",
               "description": "A practical build-through for nicer menus",
-              "file": "guides/en/code-examples/cool-thing.md",
-              "reaction": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png"
+              "file": "guides/en/code-examples/cool-thing.md"
             },
             {
               "slug": "misc",
               "title": "Misc",
               "description": "Random notes and leftovers",
-              "file": "guides/en/code-examples/misc.md",
-              "reaction": "assets/ray_chat_tikaet_palkoy_v_kamen.png"
+              "file": "guides/en/code-examples/misc.md"
             }
           ]
         },
@@ -86,22 +93,19 @@
           "kicker": "Useful file dump",
           "mascot": "assets/ray_chan_pointing_ai_slop.png",
           "layout": "wide",
-          "reaction": "assets/ray_chan_kazakhstan_alga.png",
           "pages": [
             {
               "slug": "library",
               "title": "Warehouse",
               "description": "Themes, samples, .rzm, .rzmt, and .rzmct files",
               "file": "guides/en/assets/library.md",
-              "type": "assets",
-              "reaction": "assets/ray_chan_heart.png"
+              "type": "assets"
             },
             {
               "slug": "submit",
               "title": "How to Submit",
               "description": "How to add files to the dump",
-              "file": "guides/en/assets/submit.md",
-              "reaction": "assets/ray_chat_tikaet_palkoy_v_kamen.png"
+              "file": "guides/en/assets/submit.md"
             }
           ]
         },
@@ -135,7 +139,13 @@
               "slug": "overview",
               "title": "Обзор",
               "description": "Что это за сайт и куда ты попал",
-              "file": "guides/ru/get-started/overview.md"
+              "file": "guides/ru/get-started/overview.md",
+              "hero": {
+                "image": "assets/ray_chan_pointing_ai_slop.png",
+                "alt": "RayChan shows where to start",
+                "copy": "Если ты тут впервые, сначала Installation. Если уже заблудился, тоже сначала Installation.",
+                "caption": "Спокойный старт перед тем, как меню начнёт спорить."
+              }
             },
             {
               "slug": "install",
@@ -147,7 +157,13 @@
               "slug": "first-menu",
               "title": "Первая менюшка",
               "description": "Собираем базовую RZMenu-конструкцию",
-              "file": "guides/ru/get-started/first-menu.md"
+              "file": "guides/ru/get-started/first-menu.md",
+              "hero": {
+                "image": "assets/ray_chan_thinking_ai_slop.png",
+                "alt": "RayChan thinks about the first menu",
+                "copy": "Это первая настоящая проверка. Если оно работает, дальше уже меньше боли.",
+                "caption": "Первая менюшка обычно и показывает, кто здесь главный."
+              }
             },
             {
               "slug": "toggles-textures",
@@ -169,35 +185,30 @@
           "kicker": "Скопировал, помолился",
           "mascot": "assets/ray_chan_thinking_ai_slop.png",
           "layout": "wide",
-          "reaction": "assets/ray_chan_thinking_ai_slop.png",
           "pages": [
             {
               "slug": "animation-math",
               "title": "Математика анимаций",
               "description": "Формулы для движения, клика и прочей магии",
-              "file": "guides/ru/code-examples/animation-math.md",
-              "reaction": "assets/ray_chan_thinking_ai_slop.png"
+              "file": "guides/ru/code-examples/animation-math.md"
             },
             {
               "slug": "tips",
               "title": "Советы",
               "description": "Шпаргалки, привычки и полезные мелочи",
-              "file": "guides/ru/code-examples/tips.md",
-              "reaction": "assets/ray_chan_heart.png"
+              "file": "guides/ru/code-examples/tips.md"
             },
             {
               "slug": "cool-thing",
               "title": "Как сделать крутую штуку",
               "description": "Практический разбор более приятного меню",
-              "file": "guides/ru/code-examples/cool-thing.md",
-              "reaction": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png"
+              "file": "guides/ru/code-examples/cool-thing.md"
             },
             {
               "slug": "misc",
               "title": "Прочее",
               "description": "Разные заметки и хвосты",
-              "file": "guides/ru/code-examples/misc.md",
-              "reaction": "assets/ray_chat_tikaet_palkoy_v_kamen.png"
+              "file": "guides/ru/code-examples/misc.md"
             }
           ]
         },
@@ -207,22 +218,19 @@
           "kicker": "Полезные штуки",
           "mascot": "assets/ray_chan_pointing_ai_slop.png",
           "layout": "wide",
-          "reaction": "assets/ray_chan_kazakhstan_alga.png",
           "pages": [
             {
               "slug": "library",
               "title": "Склад",
               "description": "Темы, примеры, .rzm, .rzmt и .rzmct файлы",
               "file": "guides/ru/assets/library.md",
-              "type": "assets",
-              "reaction": "assets/ray_chan_heart.png"
+              "type": "assets"
             },
             {
               "slug": "submit",
               "title": "Как залить",
               "description": "Правила добавления файлов",
-              "file": "guides/ru/assets/submit.md",
-              "reaction": "assets/ray_chat_tikaet_palkoy_v_kamen.png"
+              "file": "guides/ru/assets/submit.md"
             }
           ]
         },

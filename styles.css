@@ -534,29 +534,50 @@ a {
   max-height: 300px;
 }
 
-.reaction-banner {
+.page-hero {
   display: grid;
-  justify-items: end;
-  gap: 6px;
-  width: min(420px, 100%);
-  margin: 22px 0 0 auto;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 22px;
 }
 
-.reaction-banner img {
+.page-hero-copy {
+  min-width: 0;
+  padding-top: 6px;
+}
+
+.page-hero-copy p {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.page-hero-visual {
+  display: grid;
+  gap: 8px;
+  justify-items: end;
+  margin: 0;
+}
+
+.page-hero-visual img {
   width: 100%;
-  max-height: 230px;
+  max-height: 320px;
   margin: 0;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: #101012;
-  object-fit: cover;
+  object-fit: contain;
 }
 
-.reaction-banner figcaption {
+.page-hero-visual figcaption {
   color: var(--faint);
   font-size: 12px;
   font-weight: 900;
   text-transform: uppercase;
+  text-align: right;
 }
 
 .asset-grid {
@@ -708,10 +729,6 @@ a {
   margin-top: 12px;
 }
 
-.content-panel[data-section="assets"] .reaction-banner {
-  margin-bottom: 24px;
-}
-
 .content-panel[data-section="support-me"] .markdown .link-cloud {
   display: flex;
   flex-wrap: wrap;
@@ -824,9 +841,16 @@ a {
     font-size: 20px;
   }
 
-  .reaction-banner {
-    width: 100%;
-    margin-left: 0;
+  .page-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .page-hero-visual {
+    justify-items: start;
+  }
+
+  .page-hero-visual figcaption {
+    text-align: left;
   }
 
   .content-panel[data-section="assets"] .markdown .warehouse-card {

@@ -176,13 +176,13 @@ async function renderPage() {
 
   try {
     const markdown = await fetchPageMarkdown(page);
-    let html = renderMarkdown(markdown);
+    let html = renderPageHero(page);
+    html += renderMarkdown(markdown);
 
     if (page.type === "assets") {
       html += await renderAssetCatalog();
     }
 
-    html += renderReactionBanner(page, section);
     content.innerHTML = html;
     wireCopyButtons();
     wireImageFallbacks();
@@ -211,14 +211,24 @@ async function fetchPageMarkdown(page) {
   return chunks.join("\n\n");
 }
 
-function renderReactionBanner(page, section) {
-  const reaction = page.reaction || section?.reaction || "assets/ray_chat_tikaet_palkoy_v_kamen.png";
-  const label = state.lang === "ru" ? "Честная реакция" : "Honest reaction";
+function renderPageHero(page) {
+  const hero = page.hero;
+  if (!hero) return "";
+
+  const copy = hero.copy || "";
+  const caption = hero.caption || "";
+  const alt = hero.alt || page.title || "";
+
   return `
-    <figure class="reaction-banner">
-      <img src="${escapeHtml(reaction)}" alt="${escapeHtml(label)}">
-      <figcaption>${escapeHtml(label)}</figcaption>
-    </figure>
+    <section class="page-hero">
+      <div class="page-hero-copy">
+        <p>${escapeHtml(copy)}</p>
+      </div>
+      <figure class="page-hero-visual">
+        <img src="${escapeHtml(hero.image || "assets/ray_chat_tikaet_palkoy_v_kamen.png")}" alt="${escapeHtml(alt)}">
+        ${caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : ""}
+      </figure>
+    </section>
   `;
 }
 
