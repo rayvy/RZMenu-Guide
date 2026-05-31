@@ -9,6 +9,16 @@
       "description": "A circular counter template for RZMenu. Made for RZMenu 3.6.",
       "file": "asset-dump/files/circle_counter_max8.rzmt",
       "preview": "asset-dump/previews/circle_counter_max8.png"
+    },
+    {
+      "name": "BOADUVET",
+      "type": "rzmt template",
+      "ext": ".rzmt",
+      "author": "Rayvich",
+      "uploader": "rayvy",
+      "description": "And you don't seem to understaaaaaaand....",
+      "file": "asset-dump/files/BOADUVET.rzmt",
+      "preview": "asset-dump/previews/BOADUVET.png"
     }
   ]
 }

@@ -409,19 +409,15 @@ a {
 
 .markdown .example-strip {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(620px, 860px);
-  gap: 14px;
-  overflow-x: auto;
-  padding: 4px 4px 12px;
-  scrollbar-width: thin;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  padding: 4px 0 12px;
 }
 
 .markdown .example-card {
-  display: grid;
-  gap: 12px;
+  width: 100%;
   min-height: 100%;
-  padding: 14px;
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(18, 18, 21, 0.96);
@@ -437,13 +433,13 @@ a {
 
 .markdown .example-card summary {
   display: grid;
-  gap: 10px;
+  gap: 14px;
   padding: 0;
 }
 
 .markdown .example-card summary img {
   width: 100%;
-  height: 260px;
+  height: 200px;
   margin: 0;
   border: 1px solid var(--line);
   border-radius: calc(var(--radius) - 2px);
@@ -452,14 +448,14 @@ a {
 
 .markdown .example-card summary strong {
   display: block;
-  margin-top: 2px;
+  margin-top: 10px;
   color: var(--text);
-  font-size: 23px;
+  font-size: 24px;
   line-height: 1.05;
 }
 
 .markdown .example-card summary p {
-  margin: 0;
+  margin: 4px 0 0;
   color: var(--faint);
   font-size: 15px;
 }
@@ -467,7 +463,7 @@ a {
 .markdown .example-body {
   display: grid;
   gap: 12px;
-  padding: 0;
+  padding: 0 14px 14px;
 }
 
 .markdown .code-frame {
@@ -477,20 +473,32 @@ a {
   background: #0c0c0e;
 }
 
+.markdown .code-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 14px 0;
+}
+
 .markdown .copy-code {
   display: inline-flex;
-  align-self: start;
-  justify-self: end;
-  margin: 10px 10px 0 0;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
   padding: 7px 10px;
   border: 1px solid rgba(211, 65, 58, 0.45);
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: rgba(211, 65, 58, 0.14);
   color: var(--text);
   font: inherit;
   font-size: 13px;
   font-weight: 800;
   cursor: pointer;
+}
+
+.markdown .copy-icon {
+  width: 14px;
+  height: 14px;
+  filter: invert(1) brightness(1.8);
 }
 
 .markdown .copy-code.copied {
@@ -524,6 +532,31 @@ a {
 .markdown .example-card .hero-shot,
 .markdown .example-card .hero-inline {
   max-height: 300px;
+}
+
+.reaction-banner {
+  display: grid;
+  justify-items: end;
+  gap: 6px;
+  width: min(420px, 100%);
+  margin: 22px 0 0 auto;
+}
+
+.reaction-banner img {
+  width: 100%;
+  max-height: 230px;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #101012;
+  object-fit: cover;
+}
+
+.reaction-banner figcaption {
+  color: var(--faint);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .asset-grid {
@@ -595,6 +628,12 @@ a {
   width: min(1280px, 100%);
 }
 
+.content-panel[data-layout="wide"] .markdown {
+  width: 100%;
+  max-width: none;
+  padding: clamp(22px, 3vw, 48px) clamp(18px, 2.5vw, 40px);
+}
+
 .content-panel[data-section="code-examples"] .markdown h1 {
   margin-bottom: 10px;
 }
@@ -627,31 +666,29 @@ a {
 
 .content-panel[data-section="assets"] .markdown .warehouse-card {
   display: grid;
-  grid-template-columns: 144px minmax(0, 1fr);
-  gap: 14px;
-  padding: 14px;
+  grid-template-columns: minmax(240px, 340px) minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.04);
+  align-items: stretch;
 }
 
 .content-panel[data-section="assets"] .markdown .warehouse-card img {
   width: 100%;
-  height: 108px;
+  min-height: 180px;
+  aspect-ratio: 16 / 9;
   margin: 0;
   border: 1px solid var(--line);
   border-radius: calc(var(--radius) - 2px);
   object-fit: cover;
 }
 
-.content-panel[data-section="assets"] .markdown .warehouse-preview {
-  width: 100%;
-  height: 108px;
-  border: 1px solid var(--line);
-  border-radius: calc(var(--radius) - 2px);
-  background:
-    linear-gradient(135deg, rgba(211, 65, 58, 0.24), rgba(255, 255, 255, 0.03)),
-    #121214;
+.content-panel[data-section="assets"] .markdown .warehouse-card > div {
+  display: grid;
+  gap: 8px;
+  align-content: start;
 }
 
 .content-panel[data-section="assets"] .markdown .warehouse-card h3 {
@@ -669,6 +706,10 @@ a {
 
 .content-panel[data-section="assets"] .markdown .download-link {
   margin-top: 12px;
+}
+
+.content-panel[data-section="assets"] .reaction-banner {
+  margin-bottom: 24px;
 }
 
 .content-panel[data-section="support-me"] .markdown .link-cloud {
@@ -768,7 +809,7 @@ a {
   }
 
   .markdown .example-strip {
-    grid-auto-columns: minmax(320px, 92vw);
+    gap: 14px;
   }
 
   .markdown .example-card {
@@ -781,6 +822,15 @@ a {
 
   .markdown .example-card summary strong {
     font-size: 20px;
+  }
+
+  .reaction-banner {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .content-panel[data-section="assets"] .markdown .warehouse-card {
+    grid-template-columns: 1fr;
   }
 
   .markdown h1 {

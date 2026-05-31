@@ -2,8 +2,6 @@
 
 <p class="lead">Короткие заметки, которые экономят время. Без величия и пафоса, просто то, что легко забыть, когда проект начинает жрать тебя в ответ.</p>
 
-<img class="hero-shot" src="assets/ray_chan_thinking_ai_slop.png" alt="Ray-chan думает про заметки">
-
 <div class="example-strip">
 <details class="example-card" open>
 <summary>

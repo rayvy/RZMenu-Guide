@@ -2,8 +2,6 @@
 
 <p class="lead">A practical path for turning a blank page into something that feels intentional instead of improvised.</p>
 
-<img class="hero-shot" src="assets/ray_chan_thinking_ai_slop.png" alt="Ray-chan plotting a better menu">
-
 <div class="example-strip">
 <details class="example-card" open>
 <summary>

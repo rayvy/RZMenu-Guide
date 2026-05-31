@@ -119,6 +119,7 @@ function getAlternateLang(lang) {
 
 function updateChrome() {
   const section = getSection();
+  const page = getPage();
   const labels = ui[state.lang];
   const langMeta = state.manifest.languages[state.lang];
 
@@ -129,6 +130,7 @@ function updateChrome() {
   mascotImage.src = section?.mascot || "assets/ray_chan_pointing_ai_slop.png";
   contentPanel.dataset.section = section?.slug || "";
   contentPanel.dataset.page = state.page || "";
+  contentPanel.dataset.layout = page?.layout || section?.layout || "";
 
   langLinks.forEach(link => {
     const lang = link.dataset.lang;
@@ -162,6 +164,7 @@ function renderPageNav() {
 
 async function renderPage() {
   const page = getPage();
+  const section = getSection();
 
   if (!page) {
     showError(ui[state.lang].missing, ui[state.lang].missingBody);
@@ -172,15 +175,14 @@ async function renderPage() {
   content.hidden = true;
 
   try {
-    const response = await fetch(page.file, { cache: "no-store" });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const markdown = await response.text();
+    const markdown = await fetchPageMarkdown(page);
     let html = renderMarkdown(markdown);
 
     if (page.type === "assets") {
       html += await renderAssetCatalog();
     }
 
+    html += renderReactionBanner(page, section);
     content.innerHTML = html;
     wireCopyButtons();
     wireImageFallbacks();
@@ -190,6 +192,34 @@ async function renderPage() {
   } catch (error) {
     showError(ui[state.lang].missing, `${ui[state.lang].missingBody} (${page.file})`);
   }
+}
+
+async function fetchPageMarkdown(page) {
+  const files = Array.isArray(page.files)
+    ? page.files
+    : Array.isArray(page.parts)
+      ? page.parts
+      : [page.file];
+
+  const chunks = [];
+  for (const file of files) {
+    const response = await fetch(file, { cache: "no-store" });
+    if (!response.ok) throw new Error(`HTTP ${response.status} for ${file}`);
+    chunks.push(await response.text());
+  }
+
+  return chunks.join("\n\n");
+}
+
+function renderReactionBanner(page, section) {
+  const reaction = page.reaction || section?.reaction || "assets/ray_chat_tikaet_palkoy_v_kamen.png";
+  const label = state.lang === "ru" ? "Честная реакция" : "Honest reaction";
+  return `
+    <figure class="reaction-banner">
+      <img src="${escapeHtml(reaction)}" alt="${escapeHtml(label)}">
+      <figcaption>${escapeHtml(label)}</figcaption>
+    </figure>
+  `;
 }
 
 async function renderAssetCatalog() {
@@ -221,7 +251,7 @@ function renderAssetCard(item) {
   const typeLabel = item.type || ext || "asset";
   return `
     <article class="warehouse-card">
-      ${item.preview ? `<img src="${escapeHtml(item.preview)}" alt="">` : `<div class="warehouse-preview"></div>`}
+      <img src="${escapeHtml(item.preview || "assets/ray_chat_tikaet_palkoy_v_kamen.png")}" alt="">
       <div>
         <h3>${escapeHtml(item.name)}</h3>
         <p>${escapeHtml(item.description || "")}</p>
@@ -327,18 +357,22 @@ function wireCopyButtons() {
       const frame = button.closest(".code-frame");
       const code = frame?.querySelector("code");
       if (!code) return;
+      const label = button.querySelector(".copy-label");
 
       try {
         await navigator.clipboard.writeText(code.textContent || "");
-        const original = button.textContent;
-        button.textContent = state.lang === "ru" ? "Скопировано" : "Copied";
+        const original = label?.textContent || button.textContent;
+        if (label) label.textContent = state.lang === "ru" ? "Скопировано" : "Copied";
+        else button.textContent = state.lang === "ru" ? "Скопировано" : "Copied";
         button.classList.add("copied");
         window.setTimeout(() => {
-          button.textContent = original;
+          if (label) label.textContent = original;
+          else button.textContent = original;
           button.classList.remove("copied");
         }, 1200);
       } catch (error) {
-        button.textContent = state.lang === "ru" ? "Не скопировалось" : "Copy failed";
+        if (label) label.textContent = state.lang === "ru" ? "Не скопировалось" : "Copy failed";
+        else button.textContent = state.lang === "ru" ? "Не скопировалось" : "Copy failed";
       }
     });
   });
@@ -389,7 +423,12 @@ function renderMarkdown(markdown) {
       if (line.startsWith("```")) {
         html.push(`
           <div class="code-frame">
-            <button type="button" class="copy-code" data-copy-code>${state.lang === "ru" ? "Копировать" : "Copy"}</button>
+            <div class="code-toolbar">
+              <button type="button" class="copy-code" data-copy-code>
+                <img class="copy-icon" src="assets/copy_icon.svg" alt="">
+                <span class="copy-label">${state.lang === "ru" ? "Копировать" : "Copy"}</span>
+              </button>
+            </div>
             <pre><code>${escapeHtml(code.lines.join("\n"))}</code></pre>
           </div>
         `);

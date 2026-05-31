@@ -2,8 +2,6 @@
 
 <p class="lead">Остатки, напоминалки и куски заметок, которые не влезли больше никуда.</p>
 
-<img class="hero-shot" src="assets/ray_chan_thinking_ai_slop.png" alt="Ray-chan сортирует хвосты">
-
 <div class="example-strip">
 <details class="example-card" open>
 <summary>

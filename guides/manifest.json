@@ -47,30 +47,36 @@
           "title": "Examples and other stuff",
           "kicker": "Copy, paste, suffer less",
           "mascot": "assets/ray_chan_thinking_ai_slop.png",
+          "layout": "wide",
+          "reaction": "assets/ray_chan_thinking_ai_slop.png",
           "pages": [
             {
               "slug": "animation-math",
               "title": "Animation Math",
               "description": "Formula snippets for motion and interaction",
-              "file": "guides/en/code-examples/animation-math.md"
+              "file": "guides/en/code-examples/animation-math.md",
+              "reaction": "assets/ray_chan_thinking_ai_slop.png"
             },
             {
               "slug": "tips",
               "title": "Tips",
               "description": "Useful tricks, habits, and low-drama advice",
-              "file": "guides/en/code-examples/tips.md"
+              "file": "guides/en/code-examples/tips.md",
+              "reaction": "assets/ray_chan_heart.png"
             },
             {
               "slug": "cool-thing",
               "title": "How to Make a Cool Thing",
               "description": "A practical build-through for nicer menus",
-              "file": "guides/en/code-examples/cool-thing.md"
+              "file": "guides/en/code-examples/cool-thing.md",
+              "reaction": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png"
             },
             {
               "slug": "misc",
               "title": "Misc",
               "description": "Random notes and leftovers",
-              "file": "guides/en/code-examples/misc.md"
+              "file": "guides/en/code-examples/misc.md",
+              "reaction": "assets/ray_chat_tikaet_palkoy_v_kamen.png"
             }
           ]
         },
@@ -79,19 +85,23 @@
           "title": "Assets",
           "kicker": "Useful file dump",
           "mascot": "assets/ray_chan_pointing_ai_slop.png",
+          "layout": "wide",
+          "reaction": "assets/ray_chan_kazakhstan_alga.png",
           "pages": [
             {
               "slug": "library",
               "title": "Warehouse",
               "description": "Themes, samples, .rzm, .rzmt, and .rzmct files",
               "file": "guides/en/assets/library.md",
-              "type": "assets"
+              "type": "assets",
+              "reaction": "assets/ray_chan_heart.png"
             },
             {
               "slug": "submit",
               "title": "How to Submit",
               "description": "How to add files to the dump",
-              "file": "guides/en/assets/submit.md"
+              "file": "guides/en/assets/submit.md",
+              "reaction": "assets/ray_chat_tikaet_palkoy_v_kamen.png"
             }
           ]
         },
@@ -158,30 +168,36 @@
           "title": "Примеры-и-прочая-хуйня",
           "kicker": "Скопировал, помолился",
           "mascot": "assets/ray_chan_thinking_ai_slop.png",
+          "layout": "wide",
+          "reaction": "assets/ray_chan_thinking_ai_slop.png",
           "pages": [
             {
               "slug": "animation-math",
               "title": "Математика анимаций",
               "description": "Формулы для движения, клика и прочей магии",
-              "file": "guides/ru/code-examples/animation-math.md"
+              "file": "guides/ru/code-examples/animation-math.md",
+              "reaction": "assets/ray_chan_thinking_ai_slop.png"
             },
             {
               "slug": "tips",
               "title": "Советы",
               "description": "Шпаргалки, привычки и полезные мелочи",
-              "file": "guides/ru/code-examples/tips.md"
+              "file": "guides/ru/code-examples/tips.md",
+              "reaction": "assets/ray_chan_heart.png"
             },
             {
               "slug": "cool-thing",
               "title": "Как сделать крутую штуку",
               "description": "Практический разбор более приятного меню",
-              "file": "guides/ru/code-examples/cool-thing.md"
+              "file": "guides/ru/code-examples/cool-thing.md",
+              "reaction": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png"
             },
             {
               "slug": "misc",
               "title": "Прочее",
               "description": "Разные заметки и хвосты",
-              "file": "guides/ru/code-examples/misc.md"
+              "file": "guides/ru/code-examples/misc.md",
+              "reaction": "assets/ray_chat_tikaet_palkoy_v_kamen.png"
             }
           ]
         },
@@ -190,19 +206,23 @@
           "title": "Файлопомойка",
           "kicker": "Полезные штуки",
           "mascot": "assets/ray_chan_pointing_ai_slop.png",
+          "layout": "wide",
+          "reaction": "assets/ray_chan_kazakhstan_alga.png",
           "pages": [
             {
               "slug": "library",
               "title": "Склад",
               "description": "Темы, примеры, .rzm, .rzmt и .rzmct файлы",
               "file": "guides/ru/assets/library.md",
-              "type": "assets"
+              "type": "assets",
+              "reaction": "assets/ray_chan_heart.png"
             },
             {
               "slug": "submit",
               "title": "Как залить",
               "description": "Правила добавления файлов",
-              "file": "guides/ru/assets/submit.md"
+              "file": "guides/ru/assets/submit.md",
+              "reaction": "assets/ray_chat_tikaet_palkoy_v_kamen.png"
             }
           ]
         },

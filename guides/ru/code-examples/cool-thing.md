@@ -2,8 +2,6 @@
 
 <p class="lead">Практический путь от пустой страницы до чего-то, что выглядит осознанно, а не как случайный набор окон и паники.</p>
 
-<img class="hero-shot" src="assets/ray_chan_thinking_ai_slop.png" alt="Ray-chan планирует лучший UI">
-
 <div class="example-strip">
 <details class="example-card" open>
 <summary>

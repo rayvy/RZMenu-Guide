@@ -2,8 +2,6 @@
 
 <p class="lead">Short notes that save time. Nothing dramatic, just the stuff that is easy to forget once the project starts growing teeth.</p>
 
-<img class="hero-shot" src="assets/ray_chan_thinking_ai_slop.png" alt="Ray-chan thinking about notes">
-
 <div class="example-strip">
 <details class="example-card" open>
 <summary>

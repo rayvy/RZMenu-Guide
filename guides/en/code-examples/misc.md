@@ -2,8 +2,6 @@
 
 <p class="lead">Leftovers, reminders, and the kind of notes that do not fit neatly anywhere else.</p>
 
-<img class="hero-shot" src="assets/ray_chan_thinking_ai_slop.png" alt="Ray-chan sorting leftovers">
-
 <div class="example-strip">
 <details class="example-card" open>
 <summary>

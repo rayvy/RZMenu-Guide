@@ -2,8 +2,6 @@
 
 <p class="lead">The useful stuff here is small on purpose. You want formulas that are easy to copy, easy to change, and hard to regret later.</p>
 
-<img class="hero-shot" src="assets/ray_chan_thinking_ai_slop.png" alt="Ray-chan thinking about motion curves">
-
 <div class="callout">Boring math is usually good math. If the curve is obvious, the next person can still maintain it when the project becomes a mess.</div>
 
 <div class="example-strip">
