@@ -50,7 +50,9 @@
               "slug": "faq",
               "title": "FAQ",
               "description": "Common export questions and expected pain",
-              "file": "guides/en/get-started/faq.md"
+              "file": "guides/en/get-started/faq.md",
+              "mascot": "assets/ray_chan_freaky_ai_slop.png",
+              "caption": "Ask no questions, hear no lies. And don't look at the console."
             }
           ]
         },
@@ -175,7 +177,9 @@
               "slug": "faq",
               "title": "ФАКЬЮ",
               "description": "Ответы на вопросы, которые уже болели",
-              "file": "guides/ru/get-started/faq.md"
+              "file": "guides/ru/get-started/faq.md",
+              "mascot": "assets/ray_chan_freaky_ai_slop.png",
+              "caption": "Сюда не приходят от хорошей жизни. Держи консоль открытой."
             }
           ]
         },
