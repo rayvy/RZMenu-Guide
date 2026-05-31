@@ -16,17 +16,17 @@
               "description": "What this site is and how to use it",
               "file": "guides/en/get-started/overview.md",
               "hero": {
-                "image": "assets/ray_chan_pointing_ai_slop.png",
-                "alt": "RayChan pointing at the next step",
-                "copy": "Start here, then move to Installation. If you skip that part, the tool will not admire your courage.",
-                "caption": "The calm before the menu starts asking questions."
-              }
+                "copy": "Start here, then move to Installation. If you skip that part, the tool will not admire your courage."
+              },
+              "caption": "Welcome. Make sure to read the manual or prepare to suffer."
             },
             {
               "slug": "install",
               "title": "Installation",
               "description": "Blender and RZMenu setup",
-              "file": "guides/en/get-started/install.md"
+              "file": "guides/en/get-started/install.md",
+              "mascot": "assets/ray_chan_botan.png",
+              "caption": "Blender Python environments are a dark forest. Watch your paths."
             },
             {
               "slug": "first-menu",
@@ -34,25 +34,25 @@
               "description": "Build a basic RZMenu layout",
               "file": "guides/en/get-started/first-menu.md",
               "hero": {
-                "image": "assets/ray_chan_thinking_ai_slop.png",
-                "alt": "RayChan thinking about the first menu",
-                "copy": "This is the first real checkpoint. If it works, the rest gets less stupid.",
-                "caption": "A first menu is where theory starts paying rent."
-              }
+                "copy": "This is the first real checkpoint. If it works, the rest gets less stupid."
+              },
+              "mascot": "assets/ray_chan_rasteryannya.png",
+              "caption": "Build your elements step by step. Don't rush into complexity."
             },
             {
               "slug": "toggles-textures",
               "title": "Toggles and Textures",
               "description": "Assign mesh toggles and texture slots",
-              "file": "guides/en/get-started/toggles-textures.md"
+              "file": "guides/en/get-started/toggles-textures.md",
+              "caption": "Toggles connect Blender objects to game visibility. Bind them wisely."
             },
             {
               "slug": "faq",
               "title": "FAQ",
               "description": "Common export questions and expected pain",
               "file": "guides/en/get-started/faq.md",
-              "mascot": "assets/ray_chan_freaky_ai_slop.png",
-              "caption": "Ask no questions, hear no lies. And don't look at the console."
+              "mascot": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png",
+              "caption": "If it crashes, check the system console first. Usually, it's a path mismatch."
             }
           ]
         },
@@ -67,25 +67,31 @@
               "slug": "animation-math",
               "title": "Animation Math",
               "description": "Formula snippets for motion and interaction",
-              "file": "guides/en/code-examples/animation-math.md"
+              "file": "guides/en/code-examples/animation-math.md",
+              "mascot": "assets/ray_chan_megamozg.png",
+              "caption": "Lerp, ease, and bounce. Simple math solves 90% of dynamic UI physics."
             },
             {
               "slug": "tips",
               "title": "Tips",
               "description": "Useful tricks, habits, and low-drama advice",
-              "file": "guides/en/code-examples/tips.md"
+              "file": "guides/en/code-examples/tips.md",
+              "mascot": "assets/ray_chan_botan.png",
+              "caption": "Use isolation roots for large trees to prevent editor performance drop."
             },
             {
               "slug": "cool-thing",
               "title": "How to Make a Cool Thing",
               "description": "A practical build-through for nicer menus",
-              "file": "guides/en/code-examples/cool-thing.md"
+              "file": "guides/en/code-examples/cool-thing.md",
+              "caption": "A great UI is responsive and silent. Don't overdo the animation speed."
             },
             {
               "slug": "misc",
               "title": "Misc",
               "description": "Random notes and leftovers",
-              "file": "guides/en/code-examples/misc.md"
+              "file": "guides/en/code-examples/misc.md",
+              "caption": "Leftover notes and experimental configurations for advanced users."
             }
           ]
         },
@@ -101,19 +107,23 @@
               "title": "Warehouse",
               "description": "Themes, samples, .rzm, .rzmt, and .rzmct files",
               "file": "guides/en/assets/library.md",
-              "type": "assets"
+              "type": "assets",
+              "mascot": "assets/ray_chan_gachi_muchi_jojo_pose_ai_slop.png",
+              "caption": "Explore pre-made themes and saves. Share your own if you build something clean."
             },
             {
               "slug": "submit",
               "title": "How to Submit",
               "description": "How to add files to the dump",
-              "file": "guides/en/assets/submit.md"
+              "file": "guides/en/assets/submit.md",
+              "mascot": "assets/ray_chan_kazakhstan_alga.png",
+              "caption": "Export your .rzm, pack it with a preview, and submit a pull request."
             }
           ]
         },
         {
           "slug": "support-me",
-          "title": "Support Me",
+          "title": "Me",
           "kicker": "Keep the tool alive",
           "mascot": "assets/ray_chand_depressed_alcoholic_ai_slop.png",
           "pages": [
@@ -121,7 +131,17 @@
               "slug": "support",
               "title": "Support Notes",
               "description": "Rayvich links and notes",
-              "file": "guides/en/support-me/support.md"
+              "file": "guides/en/support-me/support.md",
+              "mascot": "assets/ray_chan_kissing.png",
+              "caption": "Thank you for supporting this project. It keeps the development going."
+            },
+            {
+              "slug": "thoughts",
+              "title": "My Thoughts",
+              "description": "Developer reflections and burnout logs",
+              "file": "guides/en/support-me/thoughts.md",
+              "mascot": "assets/ray_chand_depressed_alcoholic_ai_slop.png",
+              "caption": "Maintaining open-source tools is a marathon. Balance is key to avoiding burnout."
             }
           ]
         }
@@ -143,17 +163,17 @@
               "description": "Что это за сайт и куда ты попал",
               "file": "guides/ru/get-started/overview.md",
               "hero": {
-                "image": "assets/ray_chan_pointing_ai_slop.png",
-                "alt": "RayChan shows where to start",
-                "copy": "Если ты тут впервые, сначала Installation. Если уже заблудился, тоже сначала Installation.",
-                "caption": "Спокойный старт перед тем, как меню начнёт спорить."
-              }
+                "copy": "Если ты тут впервые, сначала Installation. Если уже заблудился, тоже сначала Installation."
+              },
+              "caption": "Че припёрся? Читать умеешь или сразу видосы на YouTube побежишь смотреть?"
             },
             {
               "slug": "install",
               "title": "Установка",
               "description": "Blender и RZMenu без шаманства",
-              "file": "guides/ru/get-started/install.md"
+              "file": "guides/ru/get-started/install.md",
+              "mascot": "assets/ray_chan_botan.png",
+              "caption": "Сука, если ты опять установил аддон не в ту папку, я тебе руки оторву."
             },
             {
               "slug": "first-menu",
@@ -161,25 +181,25 @@
               "description": "Собираем базовую RZMenu-конструкцию",
               "file": "guides/ru/get-started/first-menu.md",
               "hero": {
-                "image": "assets/ray_chan_thinking_ai_slop.png",
-                "alt": "RayChan thinks about the first menu",
-                "copy": "Это первая настоящая проверка. Если оно работает, дальше уже меньше боли.",
-                "caption": "Первая менюшка обычно и показывает, кто здесь главный."
-              }
+                "copy": "Это первая настоящая проверка. Если оно работает, дальше уже меньше боли."
+              },
+              "mascot": "assets/ray_chan_rasteryannya.png",
+              "caption": "Тыкай, блять, аккуратно! Один лишний клик — и вся твоя иерархия пойдёт по пизде."
             },
             {
               "slug": "toggles-textures",
               "title": "Тогглы и текстурки",
               "description": "Привязка мешей, битмаски и TexSlots",
-              "file": "guides/ru/get-started/toggles-textures.md"
+              "file": "guides/ru/get-started/toggles-textures.md",
+              "caption": "Если текстура опять фиолетовая, значит ты зажопил пути прописать, баран."
             },
             {
               "slug": "faq",
               "title": "ФАКЬЮ",
               "description": "Ответы на вопросы, которые уже болели",
               "file": "guides/ru/get-started/faq.md",
-              "mascot": "assets/ray_chan_freaky_ai_slop.png",
-              "caption": "Сюда не приходят от хорошей жизни. Держи консоль открытой."
+              "mascot": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png",
+              "caption": "Да блять, открой ты консоль! Там русским языком написано, где ты обосрался."
             }
           ]
         },
@@ -194,25 +214,31 @@
               "slug": "animation-math",
               "title": "Математика анимаций",
               "description": "Формулы для движения, клика и прочей магии",
-              "file": "guides/ru/code-examples/animation-math.md"
+              "file": "guides/ru/code-examples/animation-math.md",
+              "mascot": "assets/ray_chan_megamozg.png",
+              "caption": "Формулы ему сложные, блять. В школе надо было физику учить, а не пиво за гаражами пить."
             },
             {
               "slug": "tips",
               "title": "Советы",
               "description": "Шпаргалки, привычки и полезные мелочи",
-              "file": "guides/ru/code-examples/tips.md"
+              "file": "guides/ru/code-examples/tips.md",
+              "mascot": "assets/ray_chan_botan.png",
+              "caption": "Включай isolation root, не будь дебилом, а то Blender сдохнет от натуги."
             },
             {
               "slug": "cool-thing",
               "title": "Как сделать крутую штуку",
               "description": "Практический разбор более приятного меню",
-              "file": "guides/ru/code-examples/cool-thing.md"
+              "file": "guides/ru/code-examples/cool-thing.md",
+              "caption": "Хуячь плавные кривые, а не этот дёрганый кал, на который смотреть больно."
             },
             {
               "slug": "misc",
               "title": "Прочее",
               "description": "Разные заметки и хвосты",
-              "file": "guides/ru/code-examples/misc.md"
+              "file": "guides/ru/code-examples/misc.md",
+              "caption": "Сюда я свалила всякий мусор, в котором сама чёрт ногу сломит. Разбирайся сам."
             }
           ]
         },
@@ -228,27 +254,41 @@
               "title": "Склад",
               "description": "Темы, примеры, .rzm, .rzmt и .rzmct файлы",
               "file": "guides/ru/assets/library.md",
-              "type": "assets"
+              "type": "assets",
+              "mascot": "assets/ray_chan_gachi_muchi_jojo_pose_ai_slop.png",
+              "caption": "Спиздил чужую менюшку? Молодец, а теперь завали и иди переделывай под себя."
             },
             {
               "slug": "submit",
               "title": "Как залить",
               "description": "Правила добавления файлов",
-              "file": "guides/ru/assets/submit.md"
+              "file": "guides/ru/assets/submit.md",
+              "mascot": "assets/ray_chan_kazakhstan_alga.png",
+              "caption": "Казахстан алга, блять! Заливай свой архив нормально, без говна в папках."
             }
           ]
         },
         {
           "slug": "support-me",
-          "title": "ЕслиНеЖалко",
+          "title": "КакаяТоХуйня",
           "kicker": "Поддержка автора",
           "mascot": "assets/ray_chand_depressed_alcoholic_ai_slop.png",
           "pages": [
             {
               "slug": "support",
-              "title": "КакаяТоХуйня",
+              "title": "Поддержка",
               "description": "Rayvich, GitHub и прочее",
-              "file": "guides/ru/support-me/support.md"
+              "file": "guides/ru/support-me/support.md",
+              "mascot": "assets/ray_chan_kissing.png",
+              "caption": "О, донатер! Люблю тебя, сучка. Хоть кто-то ценит мой ебучий труд."
+            },
+            {
+              "slug": "thoughts",
+              "title": "Мои мысли",
+              "description": "Исповедь бухого автора мода",
+              "file": "guides/ru/support-me/thoughts.md",
+              "mascot": "assets/ray_chand_depressed_alcoholic_ai_slop.png",
+              "caption": "Опять 5 утра, я бухаю пиво и фиксирую баги для людей, которые даже спасибо не скажут."
             }
           ]
         }
