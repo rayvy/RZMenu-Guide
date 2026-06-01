@@ -1,6 +1,7 @@
 const DEFAULT_LANG = "en";
 const DEFAULT_SECTION = "get-started";
 const TROUBLESHOOTING_SECTION = "troubleshooting";
+const PROBLEMS_PAGE = "problems";
 
 const state = {
   manifest: null,
@@ -68,9 +69,6 @@ const ui = {
 };
 
 const tabs = document.querySelector("#section-tabs");
-const pageSearch = document.querySelector("#page-search");
-const pageSearchInput = document.querySelector("#page-search-input");
-const pageSearchHint = document.querySelector("#page-search-hint");
 const pageNav = document.querySelector("#page-nav");
 const content = document.querySelector("#guide-content");
 const loading = document.querySelector("#loading");
@@ -82,15 +80,21 @@ const contentPanel = document.querySelector(".content-panel");
 const footerCopy = document.querySelector("#footer-copy");
 const langLinks = document.querySelectorAll("[data-lang]");
 
-if (pageSearchInput) {
-  pageSearchInput.addEventListener("input", () => {
-    state.search = pageSearchInput.value;
+if (content) {
+  content.addEventListener("input", event => {
+    const target = event.target;
+    if (!target || target.id !== "page-search-input") return;
+    if (state.section !== TROUBLESHOOTING_SECTION || state.page !== PROBLEMS_PAGE) return;
+    state.search = target.value;
     renderPage();
   });
 
-  pageSearchInput.addEventListener("keydown", event => {
+  content.addEventListener("keydown", event => {
+    const target = event.target;
+    if (!target || target.id !== "page-search-input") return;
+    if (state.section !== TROUBLESHOOTING_SECTION || state.page !== PROBLEMS_PAGE) return;
     if (event.key === "Escape") {
-      pageSearchInput.value = "";
+      target.value = "";
       state.search = "";
       renderPage();
     }
@@ -265,19 +269,6 @@ function updateChrome() {
 
   footerCopy.innerHTML = labels.footer;
 
-  if (pageSearch) {
-    const visible = section?.slug === TROUBLESHOOTING_SECTION;
-    pageSearch.hidden = !visible;
-    if (pageSearchInput) {
-      pageSearchInput.placeholder = labels.searchPlaceholder;
-      pageSearchInput.setAttribute("aria-label", labels.searchPlaceholder);
-      pageSearchInput.value = state.search;
-    }
-    if (pageSearchHint) {
-      pageSearchHint.textContent = labels.searchHint;
-    }
-  }
-
   langLinks.forEach(link => {
     const lang = link.dataset.lang;
     link.classList.toggle("active", lang === state.lang);
@@ -348,7 +339,7 @@ async function renderPage() {
     } else {
       const markdown = await fetchPageMarkdown(page);
       const query = getSearchQuery();
-      if (state.section === TROUBLESHOOTING_SECTION && query && !pageMatchesSearch(page, query)) {
+      if (state.section === TROUBLESHOOTING_SECTION && state.page === PROBLEMS_PAGE && query && !pageMatchesSearch(page, query)) {
         content.innerHTML = `<p class="forum-empty">${escapeHtml(labels.searchEmpty)}</p>`;
         loading.hidden = true;
         content.hidden = false;
@@ -380,15 +371,21 @@ async function renderTroubleshootingBoard(page) {
   const labels = getUi();
   const query = getSearchQuery();
   const introMarkdown = page.file ? await fetchPageMarkdown(page) : "";
-  const threads = await Promise.all((page.threads || []).map(async thread => ({
-    ...thread,
-    markdown: await fetchThreadMarkdown(thread.file),
-  })));
+  const threads = [];
+  for (const thread of page.threads || []) {
+    const markdown = await fetchThreadMarkdown(thread.file);
+    threads.push({
+      ...thread,
+      markdown,
+    });
+  }
   const visibleThreads = query
     ? threads.filter(thread => pageMatchesSearch(thread, query))
     : threads;
 
   const parts = [];
+  parts.push(renderTroubleshootingSearch(labels));
+
   if (introMarkdown) {
     parts.push(`
       <section class="forum-intro markdown">
@@ -415,6 +412,23 @@ async function renderTroubleshootingBoard(page) {
   `);
 
   return parts.join("\n");
+}
+
+function renderTroubleshootingSearch(labels) {
+  return `
+    <section class="page-search">
+      <input
+        id="page-search-input"
+        type="search"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="${escapeHtml(labels.searchPlaceholder)}"
+        aria-label="${escapeHtml(labels.searchPlaceholder)}"
+        value="${escapeHtml(state.search)}"
+      >
+      <small id="page-search-hint">${escapeHtml(labels.searchHint)}</small>
+    </section>
+  `;
 }
 
 async function fetchThreadMarkdown(file) {
