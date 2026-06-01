@@ -1,11 +1,12 @@
 # RZMenu Guide
 
-Static bilingual guide site for RZMenu.
+Static trilingual guide site for RZMenu.
 
 ## Main folders
 
 - `guides/en/`: English Markdown pages.
 - `guides/ru/`: Russian Markdown pages.
+- `guides/zh/`: Simplified Chinese Markdown pages.
 - `guide-media/`: tutorial screenshots, gifs, and videos.
 - `assets/`: site visuals, background, avatar, mascot.
 - `asset-dump/`: downloadable user-facing assets and catalog.

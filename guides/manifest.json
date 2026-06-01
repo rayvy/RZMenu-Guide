@@ -296,6 +296,153 @@
           ]
         }
       ]
+    },
+    "zh": {
+      "subtitle": "实用但不客气的手册",
+      "kicker": "手册模式",
+      "sections": [
+        {
+          "slug": "get-started",
+          "title": "入门",
+          "kicker": "从这里开始",
+          "mascot": "assets/ray_chan_pointing_ai_slop.png",
+          "pages": [
+            {
+              "slug": "overview",
+              "title": "概览",
+              "description": "这个站点是什么，以及怎么用",
+              "file": "guides/zh/get-started/overview.md",
+              "hero": {
+                "copy": "先看这里，然后去安装。如果你跳过那一步，工具不会夸你有勇气。"
+              },
+              "caption": "欢迎。先看手册，不然就准备吃苦。"
+            },
+            {
+              "slug": "install",
+              "title": "安装",
+              "description": "Blender 和 RZMenu 设置",
+              "file": "guides/zh/get-started/install.md",
+              "mascot": "assets/ray_chan_botan.png",
+              "caption": "Blender 的 Python 环境就是一片黑森林，小心路径。"
+            },
+            {
+              "slug": "first-menu",
+              "title": "第一个菜单",
+              "description": "搭一个基础的 RZMenu 布局",
+              "file": "guides/zh/get-started/first-menu.md",
+              "hero": {
+                "copy": "这是真正的第一个检查点。它如果能跑，后面的事就没那么蠢了。"
+              },
+              "mascot": "assets/ray_chan_rasteryannya.png",
+              "caption": "一步一步搭元素，不要一口气冲进复杂度里。"
+            },
+            {
+              "slug": "toggles-textures",
+              "title": "开关与贴图",
+              "description": "绑定网格开关和贴图槽位",
+              "file": "guides/zh/get-started/toggles-textures.md",
+              "caption": "开关把 Blender 里的对象连到游戏可见性。用好了就行。"
+            },
+            {
+              "slug": "faq",
+              "title": "常见问题",
+              "description": "导出时那些常见问题和预期中的折磨",
+              "file": "guides/zh/get-started/faq.md",
+              "mascot": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png",
+              "caption": "如果它崩了，先看系统控制台。通常是路径对不上。"
+            }
+          ]
+        },
+        {
+          "slug": "code-examples",
+          "title": "示例和其他东西",
+          "kicker": "复制，粘贴，少受点罪",
+          "mascot": "assets/ray_chan_thinking_ai_slop.png",
+          "layout": "wide",
+          "pages": [
+            {
+              "slug": "animation-math",
+              "title": "动画数学",
+              "description": "运动和交互用的公式片段",
+              "file": "guides/zh/code-examples/animation-math.md",
+              "mascot": "assets/ray_chan_megamozg.png",
+              "caption": "Lerp、ease 和 bounce。简单数学能解决 90% 的动态 UI 物理。"
+            },
+            {
+              "slug": "tips",
+              "title": "小提示",
+              "description": "实用技巧、习惯和少折腾的建议",
+              "file": "guides/zh/code-examples/tips.md",
+              "mascot": "assets/ray_chan_botan.png",
+              "caption": "大树结构记得用隔离根，编辑器性能才不会掉得太惨。"
+            },
+            {
+              "slug": "cool-thing",
+              "title": "怎么做出一个酷东西",
+              "description": "一步步搭出更顺眼的菜单",
+              "file": "guides/zh/code-examples/cool-thing.md",
+              "caption": "好的 UI 应该响应快、声音小。别把动画速度调得太离谱。"
+            },
+            {
+              "slug": "misc",
+              "title": "杂项",
+              "description": "零碎笔记和剩菜剩饭",
+              "file": "guides/zh/code-examples/misc.md",
+              "caption": "给高级用户留的零散备注和实验配置。"
+            }
+          ]
+        },
+        {
+          "slug": "assets",
+          "title": "资源",
+          "kicker": "有用的文件堆",
+          "mascot": "assets/ray_chan_pointing_ai_slop.png",
+          "layout": "wide",
+          "pages": [
+            {
+              "slug": "library",
+              "title": "仓库",
+              "description": "主题、样例、.rzm、.rzmt 和 .rzmct 文件",
+              "file": "guides/zh/assets/library.md",
+              "type": "assets",
+              "mascot": "assets/ray_chan_gachi_muchi_jojo_pose_ai_slop.png",
+              "caption": "看看现成主题和存档。你做出干净的东西也可以自己往里扔。"
+            },
+            {
+              "slug": "submit",
+              "title": "如何提交",
+              "description": "怎么把文件加进资源堆",
+              "file": "guides/zh/assets/submit.md",
+              "mascot": "assets/ray_chan_pointing_somewhere.png",
+              "caption": "导出你的 .rzm，附上预览，然后提个 pull request。"
+            }
+          ]
+        },
+        {
+          "slug": "support-me",
+          "title": "我",
+          "kicker": "让工具活下去",
+          "mascot": "assets/ray_chand_depressed_alcoholic_ai_slop.png",
+          "pages": [
+            {
+              "slug": "support",
+              "title": "支持说明",
+              "description": "Rayvich 的链接和说明",
+              "file": "guides/zh/support-me/support.md",
+              "mascot": "assets/ray_chan_kissing.png",
+              "caption": "感谢你支持这个项目，它能继续做下去靠的就是这个。"
+            },
+            {
+              "slug": "thoughts",
+              "title": "我的想法",
+              "description": "开发者反思和燃尽记录",
+              "file": "guides/zh/support-me/thoughts.md",
+              "mascot": "assets/ray_chand_depressed_alcoholic_ai_slop.png",
+              "caption": "维护开源工具是场马拉松。平衡才是不燃尽的关键。"
+            }
+          ]
+        }
+      ]
     }
   }
 }

@@ -1,5 +1,6 @@
 const DEFAULT_LANG = "en";
 const DEFAULT_SECTION = "get-started";
+const SUPPORTED_LANGS = ["en", "ru", "zh"];
 
 const state = {
   manifest: null,
@@ -14,12 +15,45 @@ const ui = {
     missing: "Page not found",
     missingBody: "Check guides/manifest.json and the Markdown filename.",
     assetsEmpty: "No assets in the dump yet.",
+    pickPage: "Pick a page",
+    copied: "Copied",
+    copyFailed: "Copy failed",
+    copy: "Copy",
+    author: "Author",
+    uploadedBy: "Uploaded by",
+    download: "Download",
+    siteTitle: "RZMenu Guide",
+    footer: "Made by <strong>Rayvich</strong>, but coded this thing ChatGPT, and yeah funny images also ai slopped by ChatGPT",
   },
   ru: {
-    loading: "Кто прочитал тот гей...",
-    missing: "Страница потерялась",
+    loading: "Загрузка...",
+    missing: "Страница не найдена",
     missingBody: "Проверь guides/manifest.json и имя Markdown-файла.",
-    assetsEmpty: "Файлопомойка пока пустая.",
+    assetsEmpty: "В дампе пока нет файлов.",
+    pickPage: "Выберите страницу",
+    copied: "Скопировано",
+    copyFailed: "Не удалось скопировать",
+    copy: "Копировать",
+    author: "Автор",
+    uploadedBy: "Загрузил",
+    download: "Скачать",
+    siteTitle: "RZMenu Guide",
+    footer: "Сделал <strong>Rayvich</strong>, а кодил это ChatGPT, и да, смешные картинки тоже ai-slop от ChatGPT",
+  },
+  zh: {
+    loading: "加载中...",
+    missing: "页面未找到",
+    missingBody: "检查 guides/manifest.json 和 Markdown 文件名。",
+    assetsEmpty: "资源仓库里暂时没有文件。",
+    pickPage: "选择一个页面",
+    copied: "已复制",
+    copyFailed: "复制失败",
+    copy: "复制",
+    author: "作者",
+    uploadedBy: "上传者",
+    download: "下载",
+    siteTitle: "RZMenu 指南",
+    footer: "由 <strong>Rayvich</strong> 制作，这东西的代码是 ChatGPT 写的，顺便那些搞笑图片也都是 ChatGPT 胡乱生成的。",
   },
 };
 
@@ -32,7 +66,9 @@ const sideKicker = document.querySelector("#side-kicker");
 const sideTitle = document.querySelector("#side-title");
 const mascotImage = document.querySelector("#mascot-image");
 const contentPanel = document.querySelector(".content-panel");
+const footerCopy = document.querySelector("#footer-copy");
 const langLinks = document.querySelectorAll("[data-lang]");
+
 if (mascotImage) {
   mascotImage.addEventListener("error", () => {
     const fallback = "assets/ray_chat_tikaet_palkoy_v_kamen.png";
@@ -60,7 +96,7 @@ async function renderRoute() {
   state.lang = route.lang;
   state.section = route.section;
   state.page = route.page;
-  document.documentElement.lang = state.lang;
+  document.documentElement.lang = state.lang === "zh" ? "zh-Hans" : state.lang;
 
   if (!normalizeRoute()) {
     return;
@@ -74,8 +110,11 @@ async function renderRoute() {
 
 function parseRoute() {
   const parts = window.location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
+  const preferredLang = getPreferredLang();
+  const lang = getSupportedLangs().includes(parts[0]) ? parts[0] : preferredLang;
+
   return {
-    lang: parts[0] === "ru" ? "ru" : "en",
+    lang,
     section: parts[1] || DEFAULT_SECTION,
     page: parts[2] || null,
   };
@@ -85,16 +124,16 @@ function normalizeRoute() {
   const section = resolveSection(state.lang, state.section);
 
   if (!section) {
-    const fallbackLang = getAlternateLang(state.lang);
-    const fallbackSection = resolveSection(fallbackLang, state.section);
-    if (fallbackSection) {
-      state.lang = fallbackLang;
-      state.section = fallbackSection.slug;
-      state.page = fallbackSection.pages?.[0]?.slug || null;
+    const fallback = findSectionAcrossLanguages(state.section);
+    if (fallback) {
+      state.lang = fallback.lang;
+      state.section = fallback.section.slug;
+      state.page = fallback.section.pages?.[0]?.slug || null;
       history.replaceState(null, "", `#/${state.lang}/${state.section}/${state.page || ""}`);
       return true;
     }
 
+    state.lang = resolveLang(state.lang);
     window.location.hash = `#/${state.lang}/${DEFAULT_SECTION}`;
     return false;
   }
@@ -106,10 +145,9 @@ function normalizeRoute() {
   }
 
   if (state.page && !resolvePage(state.lang, state.section, state.page)) {
-    const fallbackLang = getAlternateLang(state.lang);
-    const fallbackPage = resolvePage(fallbackLang, state.section, state.page);
-    if (fallbackPage) {
-      state.lang = fallbackLang;
+    const fallback = findPageAcrossLanguages(state.section, state.page);
+    if (fallback) {
+      state.lang = fallback.lang;
       history.replaceState(null, "", `#/${state.lang}/${state.section}/${state.page}`);
       return true;
     }
@@ -121,20 +159,63 @@ function normalizeRoute() {
   return true;
 }
 
-function getAlternateLang(lang) {
-  return lang === "en" ? "ru" : "en";
+function getPreferredLang() {
+  const locale = (navigator.language || navigator.userLanguage || "").toLowerCase();
+  if (locale.startsWith("zh")) return "zh";
+  if (locale.startsWith("ru")) return "ru";
+  return DEFAULT_LANG;
+}
+
+function resolveLang(lang) {
+  return getSupportedLangs().includes(lang) ? lang : getSupportedLangs()[0] || DEFAULT_LANG;
+}
+
+function getSupportedLangs() {
+  return Object.keys(state.manifest?.languages || {});
+}
+
+function getFallbackLangs(lang) {
+  const langs = getSupportedLangs();
+  if (!langs.length) return [DEFAULT_LANG];
+
+  const start = langs.indexOf(lang);
+  if (start === -1) {
+    return langs;
+  }
+
+  return [...langs.slice(start + 1), ...langs.slice(0, start)];
+}
+
+function findSectionAcrossLanguages(slug) {
+  for (const lang of getFallbackLangs(state.lang)) {
+    const section = resolveSection(lang, slug);
+    if (section) {
+      return { lang, section };
+    }
+  }
+  return null;
+}
+
+function findPageAcrossLanguages(sectionSlug, pageSlug) {
+  for (const lang of getFallbackLangs(state.lang)) {
+    const page = resolvePage(lang, sectionSlug, pageSlug);
+    if (page) {
+      return { lang, page };
+    }
+  }
+  return null;
 }
 
 function updateChrome() {
   const section = getSection();
   const page = getPage();
-  const labels = ui[state.lang];
+  const labels = getUi();
   const langMeta = state.manifest.languages[state.lang];
 
   loading.textContent = labels.loading;
-  brandSubtitle.textContent = langMeta.subtitle;
-  sideKicker.textContent = section?.kicker || langMeta.kicker;
-  sideTitle.textContent = section?.title || "RZMenu";
+  brandSubtitle.textContent = langMeta?.subtitle || labels.siteTitle;
+  sideKicker.textContent = section?.kicker || langMeta?.kicker || "";
+  sideTitle.textContent = section?.title || labels.pickPage;
   mascotImage.src = page?.mascot || section?.mascot || "assets/ray_chan_pointing_ai_slop.png";
 
   const mascotCaption = document.querySelector("#mascot-caption");
@@ -152,6 +233,8 @@ function updateChrome() {
   contentPanel.dataset.section = section?.slug || "";
   contentPanel.dataset.page = state.page || "";
   contentPanel.dataset.layout = page?.layout || section?.layout || "";
+
+  footerCopy.innerHTML = labels.footer;
 
   langLinks.forEach(link => {
     const lang = link.dataset.lang;
@@ -185,10 +268,11 @@ function renderPageNav() {
 
 async function renderPage() {
   const page = getPage();
-  const section = getSection();
+  const labels = getUi();
 
   if (!page) {
-    showError(ui[state.lang].missing, ui[state.lang].missingBody);
+    showError(labels.missing, labels.missingBody);
+    document.title = `${labels.missing} | ${labels.siteTitle}`;
     return;
   }
 
@@ -209,9 +293,10 @@ async function renderPage() {
     wireImageFallbacks();
     loading.hidden = true;
     content.hidden = false;
-    document.title = `${page.title} | RZMenu Guide`;
+    document.title = `${page.title} | ${labels.siteTitle}`;
   } catch (error) {
-    showError(ui[state.lang].missing, `${ui[state.lang].missingBody} (${page.file})`);
+    showError(labels.missing, `${labels.missingBody} (${page.file})`);
+    document.title = `${labels.missing} | ${labels.siteTitle}`;
   }
 }
 
@@ -248,13 +333,15 @@ function renderPageHero(page) {
 }
 
 async function renderAssetCatalog() {
+  const labels = getUi();
+
   try {
     const response = await fetch("asset-dump/catalog.json", { cache: "no-store" });
     const catalog = await response.json();
     const items = sortAssets(catalog.items || []);
 
     if (!items.length) {
-      return `<p class="warehouse-note">${escapeHtml(ui[state.lang].assetsEmpty)}</p>`;
+      return `<p class="warehouse-note">${escapeHtml(labels.assetsEmpty)}</p>`;
     }
 
     const groups = groupAssets(items);
@@ -267,13 +354,15 @@ async function renderAssetCatalog() {
       </section>
     `).join("");
   } catch (error) {
-    return `<p class="warehouse-note">${escapeHtml(ui[state.lang].assetsEmpty)}</p>`;
+    return `<p class="warehouse-note">${escapeHtml(labels.assetsEmpty)}</p>`;
   }
 }
 
 function renderAssetCard(item) {
+  const labels = getUi();
   const ext = item.ext || getFileExt(item.file);
   const typeLabel = item.type || ext || "asset";
+
   return `
     <article class="warehouse-card">
       <img src="${escapeHtml(item.preview || "assets/ray_chat_tikaet_palkoy_v_kamen.png")}" alt="">
@@ -281,12 +370,12 @@ function renderAssetCard(item) {
         <h3>${escapeHtml(item.name)}</h3>
         <p>${escapeHtml(item.description || "")}</p>
         <div class="warehouse-meta">
-          ${item.author ? `<span>Author: ${escapeHtml(item.author)}</span>` : ""}
-          ${item.uploader ? `<span>Uploaded by: ${escapeHtml(item.uploader)}</span>` : ""}
+          ${item.author ? `<span>${escapeHtml(labels.author)}: ${escapeHtml(item.author)}</span>` : ""}
+          ${item.uploader ? `<span>${escapeHtml(labels.uploadedBy)}: ${escapeHtml(item.uploader)}</span>` : ""}
           ${ext ? `<span>${escapeHtml(ext)}</span>` : ""}
           ${typeLabel ? `<span>${escapeHtml(typeLabel)}</span>` : ""}
         </div>
-        <a class="download-link" href="${escapeHtml(item.file)}">Download</a>
+        <a class="download-link" href="${escapeHtml(item.file)}">${escapeHtml(labels.download)}</a>
       </div>
     </article>
   `;
@@ -309,26 +398,28 @@ function sortAssets(items) {
 }
 
 function groupAssets(items) {
-  const buckets = new Map();
-  const labels = new Map([
-    [".rzm", {
-      en: "Full saves (.rzm)",
-      ru: "Полные сохранения (.rzm)",
-    }],
-    [".rzmt", {
-      en: "Templates and chunks (.rzmt)",
-      ru: "Шаблоны и куски (.rzmt)",
-    }],
-    [".rzmct", {
-      en: "Future menu generator (.rzmct)",
-      ru: "Будущая автогенерация (.rzmct)",
-    }],
-    ["other", {
-      en: "Other files",
-      ru: "Другое",
-    }],
-  ]);
+  const labels = {
+    en: {
+      ".rzm": "Full saves (.rzm)",
+      ".rzmt": "Templates and chunks (.rzmt)",
+      ".rzmct": "Future menu generator (.rzmct)",
+      other: "Other files",
+    },
+    ru: {
+      ".rzm": "Полные сохранения (.rzm)",
+      ".rzmt": "Шаблоны и куски (.rzmt)",
+      ".rzmct": "Будущая автогенерация (.rzmct)",
+      other: "Другое",
+    },
+    zh: {
+      ".rzm": "完整存档 (.rzm)",
+      ".rzmt": "模板与片段 (.rzmt)",
+      ".rzmct": "未来菜单生成器 (.rzmct)",
+      other: "其他文件",
+    },
+  };
 
+  const buckets = new Map();
   for (const item of items) {
     const ext = getFileExt(item.file);
     const key = [".rzm", ".rzmt", ".rzmct"].includes(ext) ? ext : "other";
@@ -340,7 +431,7 @@ function groupAssets(items) {
 
   return [".rzm", ".rzmt", ".rzmct", "other"].filter(key => buckets.has(key)).map(key => ({
     key,
-    label: labels.get(key)?.[state.lang] || labels.get(key)?.en || key,
+    label: labels[state.lang]?.[key] || labels.en[key] || key,
     items: buckets.get(key),
   }));
 }
@@ -370,6 +461,10 @@ function getPage() {
   return resolvePage(state.lang, state.section, state.page);
 }
 
+function getUi() {
+  return ui[state.lang] || ui.en;
+}
+
 function showError(title, body) {
   loading.hidden = true;
   content.hidden = false;
@@ -383,12 +478,13 @@ function wireCopyButtons() {
       const code = frame?.querySelector("code");
       if (!code) return;
       const label = button.querySelector(".copy-label");
+      const labels = getUi();
 
       try {
         await navigator.clipboard.writeText(code.textContent || "");
         const original = label?.textContent || button.textContent;
-        if (label) label.textContent = state.lang === "ru" ? "Скопировано" : "Copied";
-        else button.textContent = state.lang === "ru" ? "Скопировано" : "Copied";
+        if (label) label.textContent = labels.copied;
+        else button.textContent = labels.copied;
         button.classList.add("copied");
         window.setTimeout(() => {
           if (label) label.textContent = original;
@@ -396,8 +492,8 @@ function wireCopyButtons() {
           button.classList.remove("copied");
         }, 1200);
       } catch (error) {
-        if (label) label.textContent = state.lang === "ru" ? "Не скопировалось" : "Copy failed";
-        else button.textContent = state.lang === "ru" ? "Не скопировалось" : "Copy failed";
+        if (label) label.textContent = labels.copyFailed;
+        else button.textContent = labels.copyFailed;
       }
     });
   });
@@ -416,6 +512,7 @@ function wireImageFallbacks() {
 }
 
 function renderMarkdown(markdown) {
+  const labels = getUi();
   const lines = markdown.replace(/\r\n/g, "\n").split("\n");
   const html = [];
   let paragraph = [];
@@ -451,7 +548,7 @@ function renderMarkdown(markdown) {
             <div class="code-toolbar">
               <button type="button" class="copy-code" data-copy-code>
                 <img class="copy-icon" src="assets/copy_icon.svg" alt="">
-                <span class="copy-label">${state.lang === "ru" ? "Копировать" : "Copy"}</span>
+                <span class="copy-label">${labels.copy}</span>
               </button>
             </div>
             <pre><code>${escapeHtml(code.lines.join("\n"))}</code></pre>
