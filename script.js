@@ -1,6 +1,7 @@
 const DEFAULT_LANG = "en";
 const DEFAULT_SECTION = "get-started";
 const TROUBLESHOOTING_SECTION = "troubleshooting";
+const PROBLEMS_PAGE = "problems";
 
 const state = {
   manifest: null,
@@ -266,7 +267,7 @@ function updateChrome() {
   footerCopy.innerHTML = labels.footer;
 
   if (pageSearch) {
-    const visible = section?.slug === TROUBLESHOOTING_SECTION;
+    const visible = section?.slug === TROUBLESHOOTING_SECTION && page?.slug === PROBLEMS_PAGE;
     pageSearch.hidden = !visible;
     if (pageSearchInput) {
       pageSearchInput.placeholder = labels.searchPlaceholder;
@@ -348,7 +349,7 @@ async function renderPage() {
     } else {
       const markdown = await fetchPageMarkdown(page);
       const query = getSearchQuery();
-      if (state.section === TROUBLESHOOTING_SECTION && query && !pageMatchesSearch(page, query)) {
+      if (state.section === TROUBLESHOOTING_SECTION && page.slug === PROBLEMS_PAGE && query && !pageMatchesSearch(page, query)) {
         content.innerHTML = `<p class="forum-empty">${escapeHtml(labels.searchEmpty)}</p>`;
         loading.hidden = true;
         content.hidden = false;
@@ -425,9 +426,13 @@ async function fetchThreadMarkdown(file) {
 
 function renderForumThread(thread) {
   const body = stripFirstHeading(thread.markdown || "");
+  const thumb = extractThreadThumbnail(thread.markdown || "");
   return `
     <details class="forum-thread">
       <summary class="forum-thread-summary">
+        <span class="forum-thread-thumb-wrap">
+          <img class="forum-thread-thumb" data-thread-thumb="1" src="${escapeHtml(thumb || "assets/card_placeholder.png")}" alt="">
+        </span>
         <span class="forum-thread-title">${escapeHtml(thread.title)}</span>
         ${thread.preview ? `<span class="forum-thread-preview">${escapeHtml(thread.preview)}</span>` : ""}
       </summary>
@@ -444,6 +449,20 @@ function stripFirstHeading(markdown) {
     return lines.slice(1).join("\n").trimStart();
   }
   return markdown;
+}
+
+function extractThreadThumbnail(markdown) {
+  const match = String(markdown || "").match(/!\[[^\]]*\]\(([^)]+)\)/);
+  if (match?.[1]) {
+    return match[1];
+  }
+
+  const htmlMatch = String(markdown || "").match(/<img[^>]+src=["']([^"']+)["'][^>]*>/i);
+  if (htmlMatch?.[1]) {
+    return htmlMatch[1];
+  }
+
+  return "";
 }
 
 async function fetchPageMarkdown(page) {
@@ -646,11 +665,13 @@ function wireCopyButtons() {
 }
 
 function wireImageFallbacks() {
-  const fallback = "assets/ray_chat_tikaet_palkoy_v_kamen.png";
   content.querySelectorAll("img").forEach(img => {
     if (img.dataset.fallbackBound === "1") return;
     img.dataset.fallbackBound = "1";
     img.addEventListener("error", () => {
+      const fallback = img.dataset.threadThumb === "1"
+        ? "assets/card_placeholder.png"
+        : "assets/ray_chat_tikaet_palkoy_v_kamen.png";
       if (img.src.includes(fallback)) return;
       img.src = fallback;
     });
