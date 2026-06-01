@@ -85,14 +85,14 @@ const langLinks = document.querySelectorAll("[data-lang]");
 if (pageSearchInput) {
   pageSearchInput.addEventListener("input", () => {
     state.search = pageSearchInput.value;
-    renderPageNav();
+    renderPage();
   });
 
   pageSearchInput.addEventListener("keydown", event => {
     if (event.key === "Escape") {
       pageSearchInput.value = "";
       state.search = "";
-      renderPageNav();
+      renderPage();
     }
   });
 }
@@ -297,22 +297,7 @@ function renderTabs() {
 function renderPageNav() {
   const section = getSection();
   const pages = section?.pages || [];
-  const labels = getUi();
-  const query = getSearchQuery();
-
-  const visiblePages = pages.filter(page => {
-    if (section?.slug !== TROUBLESHOOTING_SECTION || !query) {
-      return true;
-    }
-    return pageMatchesSearch(page, query);
-  });
-
-  if (!visiblePages.length) {
-    pageNav.innerHTML = `<p class="page-nav-empty">${escapeHtml(labels.searchEmpty)}</p>`;
-    return;
-  }
-
-  pageNav.innerHTML = visiblePages.map(page => {
+  pageNav.innerHTML = pages.map(page => {
     const active = page.slug === state.page ? "active" : "";
     return `
       <a class="${active}" href="#/${state.lang}/${state.section}/${page.slug}">
@@ -356,12 +341,27 @@ async function renderPage() {
   content.hidden = true;
 
   try {
-    const markdown = await fetchPageMarkdown(page);
-    let html = renderPageHero(page);
-    html += renderMarkdown(markdown);
+    let html = "";
 
-    if (page.type === "assets") {
-      html += await renderAssetCatalog();
+    if (page.threads) {
+      html = await renderTroubleshootingBoard(page);
+    } else {
+      const markdown = await fetchPageMarkdown(page);
+      const query = getSearchQuery();
+      if (state.section === TROUBLESHOOTING_SECTION && query && !pageMatchesSearch(page, query)) {
+        content.innerHTML = `<p class="forum-empty">${escapeHtml(labels.searchEmpty)}</p>`;
+        loading.hidden = true;
+        content.hidden = false;
+        document.title = `${page.title} | ${labels.siteTitle}`;
+        return;
+      }
+
+      html = renderPageHero(page);
+      html += renderMarkdown(markdown);
+
+      if (page.type === "assets") {
+        html += await renderAssetCatalog();
+      }
     }
 
     content.innerHTML = html;
@@ -374,6 +374,76 @@ async function renderPage() {
     showError(labels.missing, `${labels.missingBody} (${page.file})`);
     document.title = `${labels.missing} | ${labels.siteTitle}`;
   }
+}
+
+async function renderTroubleshootingBoard(page) {
+  const labels = getUi();
+  const query = getSearchQuery();
+  const introMarkdown = page.file ? await fetchPageMarkdown(page) : "";
+  const threads = await Promise.all((page.threads || []).map(async thread => ({
+    ...thread,
+    markdown: await fetchThreadMarkdown(thread.file),
+  })));
+  const visibleThreads = query
+    ? threads.filter(thread => pageMatchesSearch(thread, query))
+    : threads;
+
+  const parts = [];
+  if (introMarkdown) {
+    parts.push(`
+      <section class="forum-intro markdown">
+        ${renderMarkdown(introMarkdown)}
+      </section>
+    `);
+  }
+
+  if (query) {
+    parts.push(`
+      <div class="forum-search-note">${escapeHtml(labels.searchHint)}</div>
+    `);
+  }
+
+  if (!visibleThreads.length) {
+    parts.push(`<p class="forum-empty">${escapeHtml(labels.searchEmpty)}</p>`);
+    return parts.join("\n");
+  }
+
+  parts.push(`
+    <section class="forum-board">
+      ${visibleThreads.map(thread => renderForumThread(thread)).join("")}
+    </section>
+  `);
+
+  return parts.join("\n");
+}
+
+async function fetchThreadMarkdown(file) {
+  const response = await fetch(file, { cache: "no-store" });
+  if (!response.ok) throw new Error(`HTTP ${response.status} for ${file}`);
+  return response.text();
+}
+
+function renderForumThread(thread) {
+  const body = stripFirstHeading(thread.markdown || "");
+  return `
+    <details class="forum-thread">
+      <summary class="forum-thread-summary">
+        <span class="forum-thread-title">${escapeHtml(thread.title)}</span>
+        ${thread.preview ? `<span class="forum-thread-preview">${escapeHtml(thread.preview)}</span>` : ""}
+      </summary>
+      <div class="forum-thread-body markdown">
+        ${renderMarkdown(body)}
+      </div>
+    </details>
+  `;
+}
+
+function stripFirstHeading(markdown) {
+  const lines = markdown.replace(/\r\n/g, "\n").split("\n");
+  if (lines[0]?.trim().match(/^#\s+/)) {
+    return lines.slice(1).join("\n").trimStart();
+  }
+  return markdown;
 }
 
 async function fetchPageMarkdown(page) {

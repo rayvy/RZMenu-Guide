@@ -265,7 +265,9 @@ a {
 .page-search {
   display: grid;
   gap: 8px;
-  padding: 12px 12px 0;
+  width: min(900px, 100%);
+  margin: 0 auto;
+  padding: clamp(18px, 3vw, 28px) clamp(24px, 5vw, 64px) 0;
 }
 
 .page-search input {
@@ -293,6 +295,71 @@ a {
   color: var(--faint);
   font-size: 12px;
   line-height: 1.4;
+}
+
+.forum-intro {
+  margin-bottom: 24px;
+}
+
+.forum-search-note,
+.forum-empty {
+  width: min(900px, 100%);
+  margin: 0 auto;
+  padding: 12px 0 0;
+  color: var(--faint);
+  font-size: 14px;
+}
+
+.forum-board {
+  display: grid;
+  gap: 14px;
+  width: min(900px, 100%);
+  margin: 0 auto;
+}
+
+.forum-thread {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.035);
+  overflow: clip;
+}
+
+.forum-thread[open] {
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.forum-thread > summary {
+  display: grid;
+  gap: 4px;
+  padding: 15px 16px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.forum-thread > summary::-webkit-details-marker {
+  display: none;
+}
+
+.forum-thread-title {
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.forum-thread-preview {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.forum-thread-body {
+  padding: 0 16px 16px;
+  border-top: 1px solid var(--line);
+}
+
+.forum-thread-body > *:first-child {
+  margin-top: 18px;
 }
 
 .page-nav a {
@@ -335,6 +402,13 @@ a {
 
 .content-panel {
   position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-panel[data-section="code-examples"] .example-card > summary {
+  pointer-events: none;
+  cursor: default;
 }
 
 .loading {

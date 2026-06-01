@@ -1,6 +1,6 @@
 # Troubleshooting
 
-<p class="lead">Use the search box in the sidebar. These notes are split into separate files, so you can jump straight to the problem instead of rereading the whole guide.</p>
+<p class="lead">Use the search box above the thread list. These notes are split into separate files, so you can jump straight to the problem instead of rereading the whole guide.</p>
 
 If you are not sure where to start, search for the symptom first:
 
