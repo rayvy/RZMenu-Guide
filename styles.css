@@ -330,10 +330,8 @@ a {
 
 .forum-thread > summary {
   display: grid;
-  grid-template-columns: 118px minmax(0, 1fr);
-  gap: 10px 14px;
-  align-items: center;
-  padding: 14px 16px;
+  gap: 4px;
+  padding: 15px 16px;
   cursor: pointer;
   list-style: none;
 }
@@ -342,25 +340,7 @@ a {
   display: none;
 }
 
-.forum-thread-thumb-wrap {
-  display: block;
-  width: 118px;
-  height: 82px;
-  border: 1px solid var(--line);
-  border-radius: calc(var(--radius) - 1px);
-  background: rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-}
-
-.forum-thread-thumb {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
 .forum-thread-title {
-  grid-column: 2;
   color: var(--text);
   font-size: 18px;
   font-weight: 900;
@@ -368,7 +348,6 @@ a {
 }
 
 .forum-thread-preview {
-  grid-column: 2;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.45;
@@ -430,25 +409,6 @@ a {
 .content-panel[data-section="code-examples"] .example-card > summary {
   pointer-events: none;
   cursor: default;
-}
-
-.content-panel[data-section="code-examples"] .example-card > summary::-webkit-details-marker {
-  display: none;
-}
-
-.content-panel[data-section="code-examples"] .example-card[open] .example-body {
-  display: block;
-}
-
-@media (max-width: 560px) {
-  .forum-thread > summary {
-    grid-template-columns: 88px minmax(0, 1fr);
-  }
-
-  .forum-thread-thumb-wrap {
-    width: 88px;
-    height: 64px;
-  }
 }
 
 .loading {
