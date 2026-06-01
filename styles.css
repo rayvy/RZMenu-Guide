@@ -262,6 +262,39 @@ a {
   padding: 12px;
 }
 
+.page-search {
+  display: grid;
+  gap: 8px;
+  padding: 12px 12px 0;
+}
+
+.page-search input {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(0, 0, 0, 0.24);
+  color: var(--text);
+  font: inherit;
+  outline: none;
+}
+
+.page-search input::placeholder {
+  color: var(--faint);
+}
+
+.page-search input:focus {
+  border-color: rgba(211, 65, 58, 0.75);
+  box-shadow: 0 0 0 3px rgba(211, 65, 58, 0.15);
+}
+
+.page-search small {
+  color: var(--faint);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 .page-nav a {
   display: grid;
   gap: 4px;
@@ -286,6 +319,13 @@ a {
 
 .page-nav small {
   color: var(--faint);
+}
+
+.page-nav-empty {
+  margin: 0;
+  padding: 8px 12px 14px;
+  color: var(--faint);
+  font-size: 14px;
 }
 
 .content-panel {

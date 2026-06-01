@@ -9,6 +9,9 @@ $repo = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $repo
 
 Write-Host "Repo: $repo"
+Write-Host "Building guide manifest..."
+python tools/build_guide_manifest.py
+
 Write-Host "Staging files..."
 git add -A
 

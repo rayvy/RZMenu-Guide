@@ -27,6 +27,9 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Build guide manifest
+        run: python tools/build_guide_manifest.py
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

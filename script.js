@@ -1,12 +1,13 @@
 const DEFAULT_LANG = "en";
 const DEFAULT_SECTION = "get-started";
-const SUPPORTED_LANGS = ["en", "ru", "zh"];
+const TROUBLESHOOTING_SECTION = "troubleshooting";
 
 const state = {
   manifest: null,
   lang: DEFAULT_LANG,
   section: DEFAULT_SECTION,
   page: null,
+  search: "",
 };
 
 const ui = {
@@ -22,6 +23,9 @@ const ui = {
     author: "Author",
     uploadedBy: "Uploaded by",
     download: "Download",
+    searchPlaceholder: "Search problems, questions, and fixes",
+    searchHint: "Search by title, description, or body text.",
+    searchEmpty: "No matching pages.",
     siteTitle: "RZMenu Guide",
     footer: "Made by <strong>Rayvich</strong>, but coded this thing ChatGPT, and yeah funny images also ai slopped by ChatGPT",
   },
@@ -37,6 +41,9 @@ const ui = {
     author: "Автор",
     uploadedBy: "Загрузил",
     download: "Скачать",
+    searchPlaceholder: "Ищи проблемы, вопросы и решения",
+    searchHint: "Ищи по заголовку, описанию или тексту страницы.",
+    searchEmpty: "Ничего не найдено.",
     siteTitle: "RZMenu Guide",
     footer: "Сделал <strong>Rayvich</strong>, а кодил это ChatGPT, и да, смешные картинки тоже ai-slop от ChatGPT",
   },
@@ -52,12 +59,18 @@ const ui = {
     author: "作者",
     uploadedBy: "上传者",
     download: "下载",
+    searchPlaceholder: "搜索问题、问答和修复方案",
+    searchHint: "按标题、描述或正文内容搜索。",
+    searchEmpty: "没有匹配的页面。",
     siteTitle: "RZMenu 指南",
     footer: "由 <strong>Rayvich</strong> 制作，这东西的代码是 ChatGPT 写的，顺便那些搞笑图片也都是 ChatGPT 胡乱生成的。",
   },
 };
 
 const tabs = document.querySelector("#section-tabs");
+const pageSearch = document.querySelector("#page-search");
+const pageSearchInput = document.querySelector("#page-search-input");
+const pageSearchHint = document.querySelector("#page-search-hint");
 const pageNav = document.querySelector("#page-nav");
 const content = document.querySelector("#guide-content");
 const loading = document.querySelector("#loading");
@@ -68,6 +81,21 @@ const mascotImage = document.querySelector("#mascot-image");
 const contentPanel = document.querySelector(".content-panel");
 const footerCopy = document.querySelector("#footer-copy");
 const langLinks = document.querySelectorAll("[data-lang]");
+
+if (pageSearchInput) {
+  pageSearchInput.addEventListener("input", () => {
+    state.search = pageSearchInput.value;
+    renderPageNav();
+  });
+
+  pageSearchInput.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      pageSearchInput.value = "";
+      state.search = "";
+      renderPageNav();
+    }
+  });
+}
 
 if (mascotImage) {
   mascotImage.addEventListener("error", () => {
@@ -167,7 +195,8 @@ function getPreferredLang() {
 }
 
 function resolveLang(lang) {
-  return getSupportedLangs().includes(lang) ? lang : getSupportedLangs()[0] || DEFAULT_LANG;
+  const supported = getSupportedLangs();
+  return supported.includes(lang) ? lang : supported[0] || DEFAULT_LANG;
 }
 
 function getSupportedLangs() {
@@ -236,6 +265,19 @@ function updateChrome() {
 
   footerCopy.innerHTML = labels.footer;
 
+  if (pageSearch) {
+    const visible = section?.slug === TROUBLESHOOTING_SECTION;
+    pageSearch.hidden = !visible;
+    if (pageSearchInput) {
+      pageSearchInput.placeholder = labels.searchPlaceholder;
+      pageSearchInput.setAttribute("aria-label", labels.searchPlaceholder);
+      pageSearchInput.value = state.search;
+    }
+    if (pageSearchHint) {
+      pageSearchHint.textContent = labels.searchHint;
+    }
+  }
+
   langLinks.forEach(link => {
     const lang = link.dataset.lang;
     link.classList.toggle("active", lang === state.lang);
@@ -255,7 +297,22 @@ function renderTabs() {
 function renderPageNav() {
   const section = getSection();
   const pages = section?.pages || [];
-  pageNav.innerHTML = pages.map(page => {
+  const labels = getUi();
+  const query = getSearchQuery();
+
+  const visiblePages = pages.filter(page => {
+    if (section?.slug !== TROUBLESHOOTING_SECTION || !query) {
+      return true;
+    }
+    return pageMatchesSearch(page, query);
+  });
+
+  if (!visiblePages.length) {
+    pageNav.innerHTML = `<p class="page-nav-empty">${escapeHtml(labels.searchEmpty)}</p>`;
+    return;
+  }
+
+  pageNav.innerHTML = visiblePages.map(page => {
     const active = page.slug === state.page ? "active" : "";
     return `
       <a class="${active}" href="#/${state.lang}/${state.section}/${page.slug}">
@@ -264,6 +321,25 @@ function renderPageNav() {
       </a>
     `;
   }).join("");
+}
+
+function getSearchQuery() {
+  return state.search.trim().toLowerCase();
+}
+
+function pageMatchesSearch(page, query) {
+  const haystack = [
+    page.title,
+    page.description,
+    page.searchText,
+    page.slug,
+    page.file,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  return query.split(/\s+/).every(term => haystack.includes(term));
 }
 
 async function renderPage() {

@@ -45,14 +45,50 @@
               "description": "Assign mesh toggles and texture slots",
               "file": "guides/en/get-started/toggles-textures.md",
               "caption": "Toggles connect Blender objects to game visibility. Bind them wisely."
+            }
+          ]
+        },
+        {
+          "slug": "troubleshooting",
+          "title": "Troubleshooting",
+          "kicker": "Search the pain",
+          "mascot": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png",
+          "layout": "wide",
+          "pages": [
+            {
+              "slug": "index",
+              "title": "Troubleshooting",
+              "description": "Use the search box in the sidebar. These notes are split into separate files, so you can jump straight to the problem instead of rereading the whole guide.",
+              "file": "guides/en/troubleshooting/index.md",
+              "searchText": "index Troubleshooting Use the search box in the sidebar. These notes are split into separate files, so you can jump straight to the problem instead of rereading the whole guide. Troubleshooting Use the search box in the sidebar. These notes are split into separate files, so you can jump straight to the problem instead of rereading the whole guide. If you are not sure where to start, search for the symptom first: - install and dependency issues; - export weirdness and junk output; - backup, update, and workflow pain; - general questions that keep showing up."
             },
             {
               "slug": "faq",
               "title": "FAQ",
-              "description": "Common export questions and expected pain",
-              "file": "guides/en/get-started/faq.md",
-              "mascot": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png",
-              "caption": "If it crashes, check the system console first. Usually, it's a path mismatch."
+              "description": "This is the catch-all page for questions that do not fit neatly anywhere else.",
+              "file": "guides/en/troubleshooting/faq.md",
+              "searchText": "faq FAQ This is the catch-all page for questions that do not fit neatly anywhere else. FAQ This is the catch-all page for questions that do not fit neatly anywhere else. If you want the shortest route to a fix, use the search box first. If that does not help, open the closest matching article in this section. What is the mod producer / post-build step? Skip it for now. It is not finished. Why not make everything optional? Because the tool already has a huge pile of code, custom mistakes, urgency, and size. If I tried to make every little piece modular right now, I would spend more time untangling the system than building the thing."
+            },
+            {
+              "slug": "install",
+              "title": "Installation and Dependencies",
+              "description": "This page covers the usual first-launch problems: missing packages, missing editor buttons, and the annoying restart loop.",
+              "file": "guides/en/troubleshooting/install.md",
+              "searchText": "install Installation and Dependencies This page covers the usual first-launch problems: missing packages, missing editor buttons, and the annoying restart loop. Installation and Dependencies This page covers the usual first-launch problems: missing packages, missing editor buttons, and the annoying restart loop. Why does the first install sometimes need a second restart? Some early setups can fail to load dependencies such as PySide6 or Pillow on the first pass. If the editor launch button does not appear, install dependencies again and restart Blender. What should I check if the editor button does not appear? Run the dependency install again and restart Blender once more. That is usually the least interesting failure mode. What if the add-on reports missing packages? Trust the panel instead of guessing. Fix the missing dependencies first, then reload Blender and try again."
+            },
+            {
+              "slug": "export",
+              "title": "Export Weirdness",
+              "description": "This is where the output-side nonsense lives: fonts, junk files, and exports that are technically successful but still suspicious.",
+              "file": "guides/en/troubleshooting/export.md",
+              "searchText": "export Export Weirdness This is where the output-side nonsense lives: fonts, junk files, and exports that are technically successful but still suspicious. Export Weirdness This is where the output-side nonsense lives: fonts, junk files, and exports that are technically successful but still suspicious. Why does RZMenu export a font if there is no visible text? Because the UI still needs a font path for internal messages, warnings, dependency notes, and future runtime text. One base font atlas is expected. If extra font atlases show up without a reason, that is a cleanup candidate. Why is some junk exported? Because the add-on either still needs it, or I have not finished the cleanup path yet. Try removing it first. If the console stays quiet and the export still behaves, great. If something breaks, put it back."
+            },
+            {
+              "slug": "workflow",
+              "title": "Backups and Workflow",
+              "description": "This page covers the boring stuff that saves you from losing time later: backups, updates, build steps, and maintenance habits.",
+              "file": "guides/en/troubleshooting/workflow.md",
+              "searchText": "workflow Backups and Workflow This page covers the boring stuff that saves you from losing time later: backups, updates, build steps, and maintenance habits. Backups and Workflow This page covers the boring stuff that saves you from losing time later: backups, updates, build steps, and maintenance habits. Should I back up before updating? Yes, especially if a build touches templates, shape keys, export cleanup, shader logic, or ini optimization. There is also an annoying Blender hang that sometimes appears once after an add-on update. I hit it a lot because I test every commit, and I still do not fully know why it happens. What should I do about the mod producer / post-build step? Skip it for now. It is not finished. Should I keep the project modular from the start? Not aggressively. The tool already has custom mistakes, urgency, and size. If I tried to make every little piece modular right now, I would spend more time untangling the system than building the thing."
             }
           ]
         },
@@ -195,14 +231,50 @@
                 "copy": "Я забыл как объявлять комментарии в джсон. Но короче то что я снизу вставил \"Вставить текст\" это типо мета юмор"
               },
               "caption": "Вставить текст."
+            }
+          ]
+        },
+        {
+          "slug": "troubleshooting",
+          "title": "Проблемы и ФАКЬЮ",
+          "kicker": "Ищи и лечи",
+          "mascot": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png",
+          "layout": "wide",
+          "pages": [
+            {
+              "slug": "index",
+              "title": "Проблемы и ФАКЬЮ",
+              "description": "Ищи через поиск в боковой панели. Тут всё разложено по отдельным .md файлам, так что нужную боль можно открыть сразу, не перечитывая весь гайд.",
+              "file": "guides/ru/troubleshooting/index.md",
+              "searchText": "index Проблемы и ФАКЬЮ Ищи через поиск в боковой панели. Тут всё разложено по отдельным .md файлам, так что нужную боль можно открыть сразу, не перечитывая весь гайд. Проблемы и ФАКЬЮ Ищи через поиск в боковой панели. Тут всё разложено по отдельным .md файлам, так что нужную боль можно открыть сразу, не перечитывая весь гайд. Если не знаешь, с чего начать, ищи сначала по симптомам: - проблемы с установкой и зависимостями; - чудеса при экспорте и мусор в выводе; - бэкапы, обновления и боль в процессе работы; - общие вопросы, которые всплывают снова и снова."
             },
             {
               "slug": "faq",
               "title": "ФАКЬЮ",
-              "description": "Ответы на вопросы, которые уже болели",
-              "file": "guides/ru/get-started/faq.md",
-              "mascot": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png",
-              "caption": "SYUKA BLYAATTT!"
+              "description": "Это свалка для вопросов, которые не вписываются аккуратно никуда больше.",
+              "file": "guides/ru/troubleshooting/faq.md",
+              "searchText": "faq ФАКЬЮ Это свалка для вопросов, которые не вписываются аккуратно никуда больше. ФАКЬЮ Это свалка для вопросов, которые не вписываются аккуратно никуда больше. Если хочешь быстрее всего добраться до решения, сначала пользуйся поиском. Если не помогло, открой ближайшую по смыслу статью в этом разделе. Что такое mod producer / post-build? Пока забей. Оно не доделано. Почему не сделать вообще всё опциональным? Потому что у инструмента уже есть огромная куча кода, собственных косяков, срочности и размера. Если я сейчас начну делать каждую мелочь модульной, я потрачу больше времени на распутывание системы, чем на саму разработку."
+            },
+            {
+              "slug": "install",
+              "title": "Установка и зависимости",
+              "description": "Тут собраны типичные проблемы первого запуска: не хватает пакетов, не появляется кнопка редактора, и начинается этот дурацкий цикл с перезапуском.",
+              "file": "guides/ru/troubleshooting/install.md",
+              "searchText": "install Установка и зависимости Тут собраны типичные проблемы первого запуска: не хватает пакетов, не появляется кнопка редактора, и начинается этот дурацкий цикл с перезапуском. Установка и зависимости Тут собраны типичные проблемы первого запуска: не хватает пакетов, не появляется кнопка редактора, и начинается этот дурацкий цикл с перезапуском. Почему первая установка иногда требует второго перезапуска? На ранних этапах некоторые зависимости, например PySide6 или Pillow, могут не загрузиться с первого раза. Если кнопка запуска редактора не появилась, поставь зависимости ещё раз и перезапусти Blender. Что проверять, если кнопка редактора не появляется? Ещё раз запусти установку зависимостей и снова перезапусти Blender. Обычно это самый скучный вариант поломки. Что делать, если плагин пишет про missing packages? Лучше верь панели, а не угадывай. Сначала исправь недостающие зависимости, потом перезагрузи Blender и попробуй снова."
+            },
+            {
+              "slug": "export",
+              "title": "Экспорт и мусор",
+              "description": "Тут лежит вся странность на стороне вывода: шрифты, мусорные файлы и экспорты, которые вроде бы успешные, но всё равно вызывают подозрения.",
+              "file": "guides/ru/troubleshooting/export.md",
+              "searchText": "export Экспорт и мусор Тут лежит вся странность на стороне вывода: шрифты, мусорные файлы и экспорты, которые вроде бы успешные, но всё равно вызывают подозрения. Экспорт и мусор Тут лежит вся странность на стороне вывода: шрифты, мусорные файлы и экспорты, которые вроде бы успешные, но всё равно вызывают подозрения. Почему RZMenu экспортирует шрифт, даже если видимого текста нет? Потому что UI всё равно нужен путь к шрифту для внутренних сообщений, предупреждений, заметок о зависимостях и будущего runtime-текста. Один базовый font atlas ожидаем. Если без причины появляются дополнительные атласы, это уже кандидат на чистку. Почему экспортируется какой-то мусор? Потому что плагину он либо ещё нужен, либо я просто не доделал очистку. Сначала попробуй убрать это. Если консоль молчит и экспорт всё ещё работает, отлично. Если что-то ломается, верни обратно."
+            },
+            {
+              "slug": "workflow",
+              "title": "Бэкапы и процесс",
+              "description": "Тут собран скучный, но полезный материал: бэкапы, обновления, шаги сборки и привычки, которые экономят время потом.",
+              "file": "guides/ru/troubleshooting/workflow.md",
+              "searchText": "workflow Бэкапы и процесс Тут собран скучный, но полезный материал: бэкапы, обновления, шаги сборки и привычки, которые экономят время потом. Бэкапы и процесс Тут собран скучный, но полезный материал: бэкапы, обновления, шаги сборки и привычки, которые экономят время потом. Нужно ли делать бэкап перед обновлением? Да, особенно если сборка трогает шаблоны, shape key, очистку экспорта, шейдерную логику или ini-оптимизацию. Ещё есть раздражающий залип Blender, который иногда появляется один раз после обновления аддона. Я ловлю его постоянно, потому что тестирую каждый коммит, и до конца всё равно не понял, почему он возникает. Что делать с mod producer / post-build? Пока пропусти. Оно не готово. Стоит ли сразу делать проект модульным? Не слишком усердно. У инструмента уже и так хватает собственного бардака, срочности и размера. Если сейчас пытаться сделать каждую мелочь модульной, я утону в распутывании системы раньше, чем что-то успею собрать."
             }
           ]
         },
@@ -342,14 +414,50 @@
               "description": "绑定网格开关和贴图槽位",
               "file": "guides/zh/get-started/toggles-textures.md",
               "caption": "开关把 Blender 里的对象连到游戏可见性。用好了就行。"
+            }
+          ]
+        },
+        {
+          "slug": "troubleshooting",
+          "title": "问题排查",
+          "kicker": "有问题就搜",
+          "mascot": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png",
+          "layout": "wide",
+          "pages": [
+            {
+              "slug": "index",
+              "title": "问题排查",
+              "description": "先用侧边栏的搜索。这里的内容拆成了单独的 .md 文件，所以你可以直接跳到对应问题，不用把整本手册再看一遍。",
+              "file": "guides/zh/troubleshooting/index.md",
+              "searchText": "index 问题排查 先用侧边栏的搜索。这里的内容拆成了单独的 .md 文件，所以你可以直接跳到对应问题，不用把整本手册再看一遍。 问题排查 先用侧边栏的搜索。这里的内容拆成了单独的 .md 文件，所以你可以直接跳到对应问题，不用把整本手册再看一遍。 如果不确定从哪里开始，就先按症状搜索： - 安装和依赖问题； - 导出怪相和垃圾输出； - 备份、更新和流程上的坑； - 反复出现的常见问题。"
             },
             {
               "slug": "faq",
               "title": "常见问题",
-              "description": "导出时那些常见问题和预期中的折磨",
-              "file": "guides/zh/get-started/faq.md",
-              "mascot": "assets/suka_blyatt_chan_breakes_laptop_with_hummer_ai_slop.png",
-              "caption": "如果它崩了，先看系统控制台。通常是路径对不上。"
+              "description": "这是收纳那些不太方便塞进别处的问题的地方。",
+              "file": "guides/zh/troubleshooting/faq.md",
+              "searchText": "faq 常见问题 这是收纳那些不太方便塞进别处的问题的地方。 常见问题 这是收纳那些不太方便塞进别处的问题的地方。 如果想最快找到解决办法，先用搜索框。如果还是不行，就打开本节里最接近的那篇文章。 什么是 mod producer / post-build 步骤？ 先跳过。它还没做完。 为什么不把所有东西都做成可选项？ 因为这个工具已经有一大堆代码、自定义失误、紧急任务和体积了。要是我现在还想把每个小东西都模块化，我花在拆系统上的时间会比做东西还多。"
+            },
+            {
+              "slug": "install",
+              "title": "安装与依赖",
+              "description": "这里收集第一次启动时最常见的问题：缺少依赖、编辑器按钮不出现，以及那种烦人的重启循环。",
+              "file": "guides/zh/troubleshooting/install.md",
+              "searchText": "install 安装与依赖 这里收集第一次启动时最常见的问题：缺少依赖、编辑器按钮不出现，以及那种烦人的重启循环。 安装与依赖 这里收集第一次启动时最常见的问题：缺少依赖、编辑器按钮不出现，以及那种烦人的重启循环。 为什么第一次安装有时要第二次重启？ 某些早期环境第一次可能会没加载上 PySide6 或 Pillow 这类依赖。如果编辑器启动按钮没出现，重新安装依赖，然后重启 Blender。 如果编辑器按钮没出现，该检查什么？ 再跑一次依赖安装，然后再重启 Blender 一次。通常这就是最无聊的故障模式。 如果插件提示缺少包怎么办？ 先相信面板，不要猜。先把缺失依赖修好，再重启 Blender 试一次。"
+            },
+            {
+              "slug": "export",
+              "title": "导出怪相",
+              "description": "这里放的是输出侧的奇怪问题：字体、垃圾文件，以及那些技术上成功了，但看起来还是不对劲的导出结果。",
+              "file": "guides/zh/troubleshooting/export.md",
+              "searchText": "export 导出怪相 这里放的是输出侧的奇怪问题：字体、垃圾文件，以及那些技术上成功了，但看起来还是不对劲的导出结果。 导出怪相 这里放的是输出侧的奇怪问题：字体、垃圾文件，以及那些技术上成功了，但看起来还是不对劲的导出结果。 为什么没有可见文本时，RZMenu 还是会导出字体？ 因为 UI 还是需要一个字体路径，用来处理内部消息、警告、依赖说明和未来的运行时文本。 正常情况下只会需要一个基础字体图集。如果额外字体图集无缘无故冒出来，那就是清理候选。 为什么会导出一些垃圾？ 因为插件要么还需要它们，要么清理流程还没做完。 先试着删掉。如果控制台没动静而且导出还正常，那很好。如果坏了，就加回去。"
+            },
+            {
+              "slug": "workflow",
+              "title": "备份和流程",
+              "description": "这里是那些看起来无聊、但能帮你以后少掉坑的内容：备份、更新、构建步骤，以及维护习惯。",
+              "file": "guides/zh/troubleshooting/workflow.md",
+              "searchText": "workflow 备份和流程 这里是那些看起来无聊、但能帮你以后少掉坑的内容：备份、更新、构建步骤，以及维护习惯。 备份和流程 这里是那些看起来无聊、但能帮你以后少掉坑的内容：备份、更新、构建步骤，以及维护习惯。 更新前要不要备份？ 要，尤其是当构建会碰到模板、shape key、导出清理、shader 逻辑或者 ini 优化的时候。 另外还有一个很烦人的 Blender 卡顿，有时在插件更新后会出现一次。我因为每个提交都测试，所以经常碰到它，但到现在也没完全搞清楚为什么会发生。 mod producer / post-build 要怎么处理？ 先跳过。它还没完成。 一开始就要把项目做得很模块化吗？ 不用太激进。这个工具本来就有一堆自定义问题、紧急任务和体积。如果现在还要把每个小东西都拆成模块，我会先被系统拆解淹没，而不是把东西做出来。"
             }
           ]
         },
